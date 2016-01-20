@@ -1,0 +1,16 @@
+F:\visual studio 2013\WebApplication1\WebApplication1\bin\WebApplication1.dll
+F:\visual studio 2013\WebApplication1\WebApplication1\bin\WebApplication1.pdb
+F:\visual studio 2013\WebApplication1\WebApplication1\obj\Debug\WebApplication1.csprojResolveAssemblyReference.cache
+F:\visual studio 2013\WebApplication1\WebApplication1\obj\Debug\WebApplication1.dll
+F:\visual studio 2013\WebApplication1\WebApplication1\obj\Debug\WebApplication1.pdb
+F:\visual studio 2013\WebApplication1\WebApplication1\bin\HtmlAgilityPack.dll
+F:\visual studio 2013\WebApplication1\WebApplication1\bin\HtmlAgilityPack.pdb
+F:\visual studio 2013\WebApplication1\WebApplication1\bin\HtmlAgilityPack.xml
+F:\Github\JournalClassifier\WebApplication1\WebApplication1\bin\WebApplication1.dll
+F:\Github\JournalClassifier\WebApplication1\WebApplication1\bin\WebApplication1.pdb
+F:\Github\JournalClassifier\WebApplication1\WebApplication1\bin\HtmlAgilityPack.dll
+F:\Github\JournalClassifier\WebApplication1\WebApplication1\bin\HtmlAgilityPack.pdb
+F:\Github\JournalClassifier\WebApplication1\WebApplication1\bin\HtmlAgilityPack.xml
+F:\Github\JournalClassifier\WebApplication1\WebApplication1\obj\Debug\WebApplication1.dll
+F:\Github\JournalClassifier\WebApplication1\WebApplication1\obj\Debug\WebApplication1.pdb
+F:\Github\JournalClassifier\WebApplication1\WebApplication1\obj\Debug\WebApplication1.csprojResolveAssemblyReference.cache
