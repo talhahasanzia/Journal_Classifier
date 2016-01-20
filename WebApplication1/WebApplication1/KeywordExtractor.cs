@@ -11,39 +11,77 @@ namespace WebApplication1
 {
     public class KeywordExtractor
     {
-       public static List<string> springer(string uri)
+        
+
+       public static string springerKeywords(string uri)
         {
-            List<string> springerkeywords = new List<string>();
-            char[] trimmer = { ' ' };
-            char[] allTrimmer = { '\\', '(',')','/','<','>','=','"', };
+
             var html = new HtmlDocument();
+
+           char[] splitter={','};
 
             html.LoadHtml(new WebClient().DownloadString(uri)); // load a string web address
             // create a root node
             var root = html.DocumentNode;
 
-            // get element having class =Keyword, which is keyword node
-            var p = root.Descendants().Where(n => n.GetAttributeValue("class", "").Equals("Keyword")).ToArray();
+            var Tags = root.Descendants("div").Where(n => n.GetAttributeValue("id", "").Equals("idb"));
+
+          //  var TagArray = Tags.ToArray();
 
 
-            var nodes = p.ToArray();
-
-            foreach(var node in nodes)
+            string Keywords=null;
+           // this should run only once
+            foreach (var tag in Tags)
             {
 
-                string tempKeyword = node.InnerHtml;
-                // get inner text i.e keyword
 
-                tempKeyword = tempKeyword.TrimEnd(trimmer);
-                tempKeyword = tempKeyword.TrimStart(trimmer);
-                tempKeyword = tempKeyword.Trim(allTrimmer);
-                
-                springerkeywords.Add(tempKeyword);     // add to list
-                System.Diagnostics.Debug.WriteLine(tempKeyword);
+                HtmlNode spanNode = tag.ChildNodes[1].FirstChild;
+                Keywords = spanNode.InnerHtml;
+                 break;
+            
             }
-            return springerkeywords;
-        }
 
+            return Keywords;
+
+
+        }
+       
+        
+        public static string springerLink(string uri)
+       {
+
+
+           var html = new HtmlDocument();
+
+         
+
+           html.LoadHtml(new WebClient().DownloadString(uri)); // load a string web address
+           // create a root node
+           var root = html.DocumentNode;
+
+           var Tags = root.Descendants("div").Where(n => n.GetAttributeValue("id", "").Equals("FOR_AUTHOR_AND_EDITORS"));
+
+
+           string SubmitLink = null;
+
+           foreach (var element in Tags)
+           {
+
+
+               var Tag = element.Descendants("a").Where(n => n.GetAttributeValue("class", "").Equals("rightArrow linkToOpenLayer isLink")); 
+                
+               
+               foreach(var Slink in Tag)
+                {
+                    HtmlAttribute LinkAttribute = Slink.Attributes["href"];
+                    SubmitLink = LinkAttribute.Value; 
+                    break;
+                }
+               break;
+           }
+
+           return SubmitLink;
+       }
 
         public static List<string> Elsevier(string uri)
         {
@@ -100,7 +138,7 @@ namespace WebApplication1
         }
 
 
-        public static List<string> acm(string uri)
+        public static string acm(string uri)
         {
 
             List<string> ACMKeywords = new List<string>();
@@ -162,7 +200,12 @@ namespace WebApplication1
                 ACMKeywords.Add(Tag.InnerHtml);
 
             }
-            return ACMKeywords;
+
+
+            string Keywords = string.Join(",", ACMKeywords.ToArray());
+            
+            
+            return Keywords;
             
         }
 

@@ -14,83 +14,40 @@ namespace WebApplication1
 
         static List<string> FinalKeywords = new List<string>();
 
-       public static List<string> FromSpringer(string source,int depth)
+       public static Journal[] FromSpringer()
         {
-            FinalKeywords = new List<string>();
 
-            int currentPage ;
+            List<Journal> JournalsFromSpringer = new List<Journal>();
 
-            for (currentPage = 1; currentPage <= depth; currentPage++ )
-            {
-                
-           // how many pages from search results
-            Searcher.Springer.page = currentPage;
-           
+            string source = "https://www.springer.com/gp/adis/products-services";
             var html = new HtmlDocument();
 
+
             html.LoadHtml(new WebClient().DownloadString(source)); // load a string web address
-           // create a root node
-           var root = html.DocumentNode;
+            // create a root node
+            var root = html.DocumentNode;
 
-           // get element having class =title, which is juournal link node
-            var p = root.Descendants().Where(n => n.GetAttributeValue("class", "").Equals("title")).ToArray();
-
-                
-            var nodes = p.ToArray();
+            var Links = root.Descendants().Where(n => n.GetAttributeValue("class", "").Equals("flapContent--paragraph"));
 
 
-            List<string> Links = new List<string>();
-
-            foreach (var node in nodes)
+            foreach (var Link in Links)
             {
-                try
-                {
 
-                    // get HREF attribute of current node, because we need link
-                    HtmlAttribute link = node.Attributes["href"];
-
-                    // create a proper link
-                    string temp = "http://link.springer.com" + link.Value;
-                    Links.Add(temp);
-                   
-                }
-                catch (Exception ex)
-                {
-
-
-                }
-
-
-            }
-           
-           // for each journal (link), get keywords
-            foreach (string link in Links)
-            {
-                // keywords returned as List of string
-                List<string> tempKeywords=KeywordExtractor.springer(link);
                
+                    Journal JournalObj = new Journal();
 
-                // when keyword is returned, check if that already exists in current bag
-                foreach (string keyword in tempKeywords)
-                {
-                    
-                    // already is in current word group-bag
-                    if (FinalKeywords.Contains(keyword)) 
-                    {   /* do nothing */ }
-                    else    // not in word bag, so add
-                    { FinalKeywords.Add(keyword);  }
+                    HtmlAttribute newAttribute = Link.FirstChild.Attributes["href"];
+                    JournalObj.Link = newAttribute.Value;
+                    JournalObj.Name = Link.InnerHtml;
+                    JournalObj.Website = "Springer";
+                    JournalObj.Keywords = KeywordExtractor.springerKeywords(JournalObj.Link);
+                    JournalObj.Submit = KeywordExtractor.springerLink(JournalObj.Link);
+                    JournalsFromSpringer.Add(JournalObj);
                 
-                    // do for each keyword
-
-                }
-
-
-            // do for each journal (link)
+            
             }
-       }
 
-            return FinalKeywords;
-
+            return JournalsFromSpringer.ToArray();
         }
 
 
@@ -106,9 +63,7 @@ namespace WebApplication1
            for (currentPage = 1; currentPage <= depth; currentPage++)
            {
 
-               // how many pages from search results
-               Searcher.Springer.page = currentPage;
-
+               
                var html = new HtmlDocument();
 
                
@@ -220,22 +175,11 @@ namespace WebApplication1
                journalData.Link = LinkOfJournal;
                journalData.Website = "ACM";
 
-               // keywords returned as List of string
-               List<string> tempKeywords = KeywordExtractor.acm(LinkOfJournal);
 
-               // when keyword is returned, check if that already exists in current bag
-               foreach (string keyword in tempKeywords)
-               {
-                   // already is in current word group-bag
-                   if (FinalKeywords.Contains(keyword))
-                   { /* do nothing */ }
-                   else    // not in word bag, so add
-                   { FinalKeywords.Add(keyword.ToLower()); }
+               journalData.Keywords = KeywordExtractor.acm(LinkOfJournal);
 
-                   // do for each keyword
-               }
-               string KeywordString = String.Join(",", FinalKeywords.ToArray());
-               journalData.Keywords = KeywordString;
+               
+              
                JournalDataList.Add(journalData);
            }
 
@@ -247,36 +191,7 @@ namespace WebApplication1
 
 
 
-       static string GetHtml(string urlAddress)
-       {
-
-
-           string data=null;
-           HttpWebRequest request = (HttpWebRequest)WebRequest.Create(urlAddress);
-           HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-
-           if (response.StatusCode == HttpStatusCode.OK)
-           {
-               Stream receiveStream = response.GetResponseStream();
-               StreamReader readStream = null;
-
-               if (response.CharacterSet == null)
-               {
-                   readStream = new StreamReader(receiveStream);
-               }
-               else
-               {
-                   readStream = new StreamReader(receiveStream, Encoding.GetEncoding(response.CharacterSet));
-               }
-
-                data = readStream.ReadToEnd();
-
-               response.Close();
-               readStream.Close();
-           }
-
-           return data;
-       }
+       
 
     }
 }

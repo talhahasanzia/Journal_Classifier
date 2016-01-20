@@ -12,7 +12,7 @@ namespace WebApplication1
     public partial class Admin : System.Web.UI.Page
     {
         static List<string> keywords=new List<string>();
-       static string source=Searcher.Springer.ComputerScience;
+      
        static Journal[] journalData;
        
         protected void Page_Load(object sender, EventArgs e)
@@ -30,11 +30,11 @@ namespace WebApplication1
             setValues();
 
             if (DropDownList1.SelectedValue == "Springer")
-                keywords = JournalLinks.FromSpringer(source, GetDepth());
+                journalData = JournalLinks.FromSpringer();
             else if (DropDownList1.SelectedValue == "ACM")
                 journalData = JournalLinks.FromACM();
             else if (DropDownList1.SelectedValue == "Elsevier")
-                keywords = JournalLinks.FromElsevier(source, GetDepth());
+                keywords = JournalLinks.FromElsevier("", GetDepth());
 
             else
                 Label1.Text = "Error Occured";

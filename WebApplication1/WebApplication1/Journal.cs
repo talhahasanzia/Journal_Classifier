@@ -15,5 +15,7 @@ namespace WebApplication1
 
         public string Website { get; set; }
 
+        public string Submit { get; set; }
+
     }
 }

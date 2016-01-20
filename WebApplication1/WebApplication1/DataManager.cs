@@ -67,6 +67,7 @@ namespace WebApplication1
                         journalData[i].Link = SQLdset.Tables[tableName].Rows[i]["JournalLink"].ToString();
                         journalData[i].Website = SQLdset.Tables[tableName].Rows[i]["Website"].ToString();
                         journalData[i].Keywords = SQLdset.Tables[tableName].Rows[i]["Keywords"].ToString();
+                        journalData[i].Submit = SQLdset.Tables[tableName].Rows[i]["SubmitLink"].ToString();
                        
                         
                     }
@@ -109,7 +110,7 @@ namespace WebApplication1
                         foreach (Journal journal in journalDataList)
                         {
 
-                            sql = "INSERT INTO " + tableName + "(JournalName, JournalLink, Keywords, Website) VALUES('" + journal.Name + "','" + journal.Link + "','" + journal.Keywords.ToLower() + "','" + journal.Website +"');";
+                            sql = "INSERT INTO " + tableName + "(JournalName, JournalLink, Keywords, Website, SubmitLink) VALUES('" + journal.Name + "','" + journal.Link + "','" + journal.Keywords.ToLower() + "','" + journal.Website + "','" + journal.Submit + "');";
                             comm.CommandText = sql;
 
                             try
