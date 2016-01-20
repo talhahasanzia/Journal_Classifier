@@ -43,7 +43,7 @@ namespace WebApplication1
                
                 SQLCon.Open();
 
-                string Comm = "SELECT * FROM ";
+                string Comm = "SELECT * FROM Journal_Data;";
 
                 SQLAdp.Fill(SQLdset,tableName);
 
@@ -108,8 +108,8 @@ namespace WebApplication1
 
                         foreach (Journal journal in journalDataList)
                         {
-                           
-                            sql = "INSERT INTO " + tableName + "(JournalName, JournalLink, Website, Keywords) VALUES('" + journal.Name + "','" + journal.Link + "','" + journal.Website + "','" + journal.Keywords.ToLower() + "');";
+
+                            sql = "INSERT INTO " + tableName + "(JournalName, JournalLink, Keywords, Website) VALUES('" + journal.Name + "','" + journal.Link + "','" + journal.Keywords.ToLower() + "','" + journal.Website +"');";
                             comm.CommandText = sql;
 
                             try

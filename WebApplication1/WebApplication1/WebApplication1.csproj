@@ -66,6 +66,7 @@
     <Content Include="App_Data\KeywordsDB.sdf" />
     <Content Include="css\bootstrap.css" />
     <Content Include="css\bootstrap.min.css" />
+    <Content Include="css\Custom.css" />
     <Content Include="css\freelancer.css" />
     <Content Include="font-awesome\css\font-awesome.css" />
     <Content Include="font-awesome\css\font-awesome.min.css" />
@@ -112,8 +113,6 @@
       <DependentUpon>Main.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Searcher.cs" />
-    <Compile Include="TableNames.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="font-awesome\fonts\fontawesome-webfont.eot" />

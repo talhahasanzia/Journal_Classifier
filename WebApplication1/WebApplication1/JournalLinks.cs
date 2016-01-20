@@ -194,6 +194,8 @@ namespace WebApplication1
            List<Journal> JournalDataList = new List<Journal>();
            string source = "http://dl.acm.org/pubs.cfm";
            var html = new HtmlDocument();
+         
+           
            html.LoadHtml(new WebClient().DownloadString(source)); // load a string web address
            // create a root node
            var root = html.DocumentNode;
@@ -205,7 +207,7 @@ namespace WebApplication1
                Journal journalData = new Journal();
 
                FinalKeywords = new List<string>();
-               string temp;
+              
                var SecondChild = item.ChildNodes[3];
                var SecondGrandChild = SecondChild.ChildNodes[2];
 
