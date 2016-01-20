@@ -14,3 +14,6 @@ F:\Github\JournalClassifier\WebApplication1\WebApplication1\bin\HtmlAgilityPack.
 F:\Github\JournalClassifier\WebApplication1\WebApplication1\obj\Debug\WebApplication1.dll
 F:\Github\JournalClassifier\WebApplication1\WebApplication1\obj\Debug\WebApplication1.pdb
 F:\Github\JournalClassifier\WebApplication1\WebApplication1\obj\Debug\WebApplication1.csprojResolveAssemblyReference.cache
+F:\Github\Journal_Classifier\WebApplication1\WebApplication1\obj\Debug\WebApplication1.csprojResolveAssemblyReference.cache
+F:\Github\Journal_Classifier\WebApplication1\WebApplication1\obj\Debug\WebApplication1.dll
+F:\Github\Journal_Classifier\WebApplication1\WebApplication1\obj\Debug\WebApplication1.pdb

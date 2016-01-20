@@ -187,87 +187,62 @@ namespace WebApplication1
        }
 
 
-       public static List<string> FromACM(string source, int depth)
+       public static Journal[] FromACM()
        {
 
            FinalKeywords = new List<string>();
+           List<Journal> JournalDataList = new List<Journal>();
+           string source = "http://dl.acm.org/pubs.cfm";
+           var html = new HtmlDocument();
+           html.LoadHtml(new WebClient().DownloadString(source)); // load a string web address
+           // create a root node
+           var root = html.DocumentNode;
 
-           int currentPage;
+           var trs = root.Descendants("tr").Where(n => n.GetAttributeValue("valign", "").Equals("top"));
 
-           for (currentPage = 1; currentPage <= depth; currentPage++)
+           foreach (var item in trs)
            {
+               Journal journalData = new Journal();
 
-               // how many pages from search results
-               Searcher.Springer.page = currentPage;
-
-               var html = new HtmlDocument();
-
-               html.LoadHtml(new WebClient().DownloadString(source)); // load a string web address
-               // create a root node
-               var root = html.DocumentNode;
-
-               // get element having class =title, which is juournal link node
-               var p = root.Descendants().Where(n => n.GetAttributeValue("class", "").Equals("title")).ToArray();
+               FinalKeywords = new List<string>();
+               string temp;
+               var SecondChild = item.ChildNodes[3];
+               var SecondGrandChild = SecondChild.ChildNodes[2];
 
 
-               var nodes = p.ToArray();
+               HtmlAttribute TitleName = SecondGrandChild.Attributes["title"];
+               HtmlAttribute TitleLink = SecondGrandChild.Attributes["href"];
 
+               string LinkOfJournal = "http://dl.acm.org/" + TitleLink.Value;
+               journalData.Name = TitleName.Value;
+               journalData.Link = LinkOfJournal;
+               journalData.Website = "ACM";
 
-               List<string> Links = new List<string>();
+               // keywords returned as List of string
+               List<string> tempKeywords = KeywordExtractor.acm(LinkOfJournal);
 
-               foreach (var node in nodes)
+               // when keyword is returned, check if that already exists in current bag
+               foreach (string keyword in tempKeywords)
                {
-                   try
-                   {
-                       
+                   // already is in current word group-bag
+                   if (FinalKeywords.Contains(keyword))
+                   { /* do nothing */ }
+                   else    // not in word bag, so add
+                   { FinalKeywords.Add(keyword.ToLower()); }
 
-
-                       // get HREF attribute of current node, because we need link
-                       HtmlAttribute link = node.ChildNodes[1].Attributes["href"];
-
-                       // create a proper link
-                       string temp = "http://dl.acm.org/" + link.Value;
-                       Links.Add(temp);
-
-                   }
-                   catch (Exception ex)
-                   {
-                       System.Diagnostics.Debug.WriteLine(ex.Message);
-
-                   }
-
-
+                   // do for each keyword
                }
-
-               // for each journal (link), get keywords
-               foreach (string link in Links)
-               {
-                   // keywords returned as List of string
-                   List<string> tempKeywords = KeywordExtractor.acm(link);
-
-
-                   // when keyword is returned, check if that already exists in current bag
-                   foreach (string keyword in tempKeywords)
-                   {
-
-                       // already is in current word group-bag
-                       if (FinalKeywords.Contains(keyword))
-                       { /* do nothing */ }
-                       else    // not in word bag, so add
-                       { FinalKeywords.Add(keyword); }
-
-                       // do for each keyword
-
-                   }
-
-
-                   // do for each journal (link)
-               }
+               string KeywordString = String.Join(",", FinalKeywords.ToArray());
+               journalData.Keywords = KeywordString;
+               JournalDataList.Add(journalData);
            }
 
-           return FinalKeywords;
+           return JournalDataList.ToArray();
+
+
 
        }
+
 
 
        static string GetHtml(string urlAddress)

@@ -25,51 +25,62 @@ namespace WebApplication1
      
            
         }
-            public static List<string> GetData(string tableName)
+
+
+
+            public static Journal[] GetJournalData()
             {
+                Journal[] journalData = new Journal[1]; // sample declaration to prevent compile time error
+
                 SQLCon = new SqlCeConnection();
 
+                string tableName = "Journal_Data";
                 string ConString = @"Data Source=|DataDirectory|KeywordsDB.sdf;";
-                    //@"Data Source=" + "F:\\Github\\JournalClassifier\\WebApplication1\\WebApplication1\\App_Data\\KeywordsDB.sdf;";
-                SQLCon.ConnectionString = ConString; 
 
-                List<string> WordList = new List<string>();
+                 SQLCon.ConnectionString = ConString; 
+
+              
+               
                 SQLCon.Open();
 
-                string Comm = "SELECT * FROM "+tableName;
-
-                SQLAdp = new SqlCeDataAdapter(Comm, SQLCon);
-
-                SQLAdp.SelectCommand = new SqlCeCommand(Comm, SQLCon);
-
-                SQLdset = new DataSet();
+                string Comm = "SELECT * FROM ";
 
                 SQLAdp.Fill(SQLdset,tableName);
 
-
-
-
                 SQLCon.Close();
+
 
                 if (SQLdset != null)
                 {
                     ;
                     int j = SQLdset.Tables[tableName].Rows.Count;
                    
+
+                 journalData = new Journal[j];
                     ;
 
                     for (int i = 0; i < j ; i++)
                     {
+                        journalData[i] = new Journal();
 
-                        string temp = SQLdset.Tables[tableName].Rows[i]["Keywords"].ToString();
-                        WordList.Add(temp.ToLower());
+                        journalData[i].Name = SQLdset.Tables[tableName].Rows[i]["JournalName"].ToString();
+                        journalData[i].Link = SQLdset.Tables[tableName].Rows[i]["JournalLink"].ToString();
+                        journalData[i].Website = SQLdset.Tables[tableName].Rows[i]["Website"].ToString();
+                        journalData[i].Keywords = SQLdset.Tables[tableName].Rows[i]["Keywords"].ToString();
+                       
                         
                     }
                 }
-                return WordList;
+                return journalData;
+
             }
-            public static  void SetData(string tableName, List<string> keywordsList)
+
+
+
+            public static void SetJournalData(Journal[] journalDataList)
             {
+                string tableName = "Journal_Data";
+                
                 SQLCon = new SqlCeConnection();
 
                 string ConString = @"Data Source=|DataDirectory|KeywordsDB.sdf;";
@@ -95,9 +106,10 @@ namespace WebApplication1
 
 
 
-                        foreach (string word in keywordsList)
+                        foreach (Journal journal in journalDataList)
                         {
-                            sql = "INSERT INTO " + tableName + "(Keywords) VALUES('" + word.ToLower() + "');";
+                           
+                            sql = "INSERT INTO " + tableName + "(JournalName, JournalLink, Website, Keywords) VALUES('" + journal.Name + "','" + journal.Link + "','" + journal.Website + "','" + journal.Keywords.ToLower() + "');";
                             comm.CommandText = sql;
 
                             try

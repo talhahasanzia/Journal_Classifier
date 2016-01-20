@@ -102,61 +102,68 @@ namespace WebApplication1
 
         public static List<string> acm(string uri)
         {
-            List<string> acmkeywords = new List<string>();
+
+            List<string> ACMKeywords = new List<string>();
 
 
-            int counter = 0;
-            string ccsforthisarticle = "CCS&nbsp;for&nbsp;this&nbsp;Article";
-            string end = "]);";
-            bool printNow = false;
-            string quoteandgreatersymbol = "\">";
-            string path = HttpContext.Current.Server.MapPath("~/App_Data/ACMhtmlFile.txt");
-            Stream writer = new FileStream(path, FileMode.Create);
-            writer.Close();
-            //  string link = "http://dl.acm.org/citation.cfm?id=1073209&CFID=574953640&CFTOKEN=74149999";
-            using (WebClient client = new WebClient())
+
+            string extension = "&acronym=TACCESS&_cf_containerId=about‌%E2%80%8B&_cf_nodebug=true&_cf_nocache=true";
+            string input = uri;
+
+            int index = input.IndexOf("&");
+            if (index > 0)
+                input = input.Substring(0, index);
+
+            input = input.Insert(21, "_about");
+
+            input = input + extension;
+            var html = new HtmlDocument();
+
+
+
+            html.LoadHtml(new WebClient().DownloadString(input));
+            // load a string web address
+
+
+
+
+
+
+            // create a root node
+            var root = html.DocumentNode;
+
+            // get element having class =Keyword, which is keyword node
+            var LargestTags = root.Descendants("a").Where(n => n.GetAttributeValue("class", "").Equals("largestTag")).ToArray();
+            var LargeTags = root.Descendants("a").Where(n => n.GetAttributeValue("class", "").Equals("largeTag")).ToArray();
+            var SmallestTags = root.Descendants("a").Where(n => n.GetAttributeValue("class", "").Equals("smallestTag")).ToArray();
+            var SmallTags = root.Descendants("a").Where(n => n.GetAttributeValue("class", "").Equals("smallTag")).ToArray();
+
+            foreach (var Tag in LargestTags)
             {
 
-                client.DownloadFile(uri, path);
+                ACMKeywords.Add(Tag.InnerHtml);
+            
+            }
+            foreach (var Tag in LargeTags)
+            {
 
-                foreach (var line in File.ReadLines(path))
-                {
-
-                    if (printNow)
-                    {
-                        if (line.Contains(end))
-                        {
-                            printNow = false;
-                            counter++;
-                        }
-                    }
-                    if (printNow)
-                    {
-
-                        if (line.Contains(quoteandgreatersymbol))
-                        {
-                            var a = line.IndexOf("href");
-                            var b = line.LastIndexOf("/a>");
-                            var c = line.Substring(a, b - a);
-                            var d = c.IndexOf('>');
-                            var e = c.IndexOf('<');
-                            var f = c.Substring(d, e - d);
-                            acmkeywords.Add(f.Trim('>'));
-                            System.Diagnostics.Debug.WriteLine(f.Trim('>'));
-                        }
-
-                    }
-                    if ((line.Contains(ccsforthisarticle)) && counter == 0)
-                        printNow = true;
-
-                }
+                ACMKeywords.Add(Tag.InnerHtml);
 
             }
+            foreach (var Tag in SmallestTags)
+            {
 
+                ACMKeywords.Add(Tag.InnerHtml);
 
+            }
+            foreach (var Tag in SmallTags)
+            {
 
+                ACMKeywords.Add(Tag.InnerHtml);
 
-            return acmkeywords;
+            }
+            return ACMKeywords;
+            
         }
 
 

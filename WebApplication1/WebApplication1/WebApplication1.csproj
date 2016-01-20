@@ -101,6 +101,7 @@
     </Compile>
     <Compile Include="Comparator.cs" />
     <Compile Include="DataManager.cs" />
+    <Compile Include="Journal.cs" />
     <Compile Include="JournalLinks.cs" />
     <Compile Include="KeywordExtractor.cs" />
     <Compile Include="Main.aspx.cs">

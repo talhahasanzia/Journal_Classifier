@@ -32,13 +32,7 @@ namespace WebApplication1
             
             
             }
-            float CSMatch = Comparator.matchSpringerCS(filteredKeywords.ToArray());
-            float ENMatch = Comparator.matchSpringerEngineering(filteredKeywords.ToArray());
-            float MAMatch = Comparator.matchSpringerMA(filteredKeywords.ToArray());
-
-            SCS.Text = " Computer Science: " +CSMatch  + "%";
-            SEN.Text = " Engineering: " + ENMatch + "%";
-            SMA.Text = " Mathematics: " + MAMatch + "%";
+           
             ; ;
         }
     }
