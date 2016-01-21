@@ -17,5 +17,19 @@ namespace WebApplication1
 
         public string Submit { get; set; }
 
+
+
+        public Journal()
+        {
+
+            Name = "";
+            Link = "";
+            Keywords = "";
+            Website = "";
+            Submit = "";
+        
+        
+        }
+
     }
 }

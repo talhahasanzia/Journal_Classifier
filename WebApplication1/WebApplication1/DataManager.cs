@@ -95,8 +95,7 @@ namespace WebApplication1
                 {
                     SQLCon.Open();
 
-                    if (DeleteOnUpdate(tableName))
-                    {
+                   
                         string sql;
 
 
@@ -106,11 +105,18 @@ namespace WebApplication1
                         comm.Connection = SQLCon;
 
 
+                        int count = journalDataList.Length;
 
-                        foreach (Journal journal in journalDataList)
+
+                        for (int i = 0; i < count; i++ )
                         {
+                            
 
-                            sql = "INSERT INTO " + tableName + "(JournalName, JournalLink, Keywords, Website, SubmitLink) VALUES('" + journal.Name + "','" + journal.Link + "','" + journal.Keywords.ToLower() + "','" + journal.Website + "','" + journal.Submit + "');";
+                           
+                                sql = "INSERT INTO " + tableName + "(JournalName, JournalLink, Keywords, Website, SubmitLink) VALUES('" + journalDataList[i].Name + "','" + journalDataList[i].Link + "','" + journalDataList[i].Keywords.ToLower() + "','" + journalDataList[i].Website + "','" + journalDataList[i].Submit + "');";
+
+                           
+
                             comm.CommandText = sql;
 
                             try
@@ -132,7 +138,7 @@ namespace WebApplication1
                             }
                         }
                         SQLCon.Close();
-                    }
+                    
                 }
                
 

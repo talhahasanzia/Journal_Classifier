@@ -64,6 +64,7 @@
   <ItemGroup>
     <Content Include="Admin.aspx" />
     <Content Include="App_Data\KeywordsDB.sdf" />
+    <Content Include="App_Data\Links.txt" />
     <Content Include="css\bootstrap.css" />
     <Content Include="css\bootstrap.min.css" />
     <Content Include="css\Custom.css" />
@@ -90,6 +91,7 @@
     <Content Include="js\jqBootstrapValidation.js" />
     <Content Include="js\jquery.js" />
     <Content Include="Main.aspx" />
+    <Content Include="Testing form.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -113,6 +115,13 @@
       <DependentUpon>Main.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Testing form.aspx.cs">
+      <DependentUpon>Testing form.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Testing form.aspx.designer.cs">
+      <DependentUpon>Testing form.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="font-awesome\fonts\fontawesome-webfont.eot" />

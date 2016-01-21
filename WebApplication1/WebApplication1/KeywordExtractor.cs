@@ -16,70 +16,158 @@ namespace WebApplication1
        public static string springerKeywords(string uri)
         {
 
+            string Keywords = null;
+
+           string springer="http://www.springer.com/";
+
             var html = new HtmlDocument();
 
            char[] splitter={','};
 
-            html.LoadHtml(new WebClient().DownloadString(uri)); // load a string web address
-            // create a root node
-            var root = html.DocumentNode;
+           if (uri.Contains(springer))
+           {
+               uri = uri + "?detailsPage=aboutThis";
 
-            var Tags = root.Descendants("div").Where(n => n.GetAttributeValue("id", "").Equals("idb"));
-
-          //  var TagArray = Tags.ToArray();
-
-
-            string Keywords=null;
-           // this should run only once
-            foreach (var tag in Tags)
-            {
+               try
+               {
+                   html.LoadHtml(new WebClient().DownloadString(uri)); // load a string web address
 
 
-                HtmlNode spanNode = tag.ChildNodes[1].FirstChild;
-                Keywords = spanNode.InnerHtml;
-                 break;
-            
-            }
+                   // create a root node
+                   var root = html.DocumentNode;
 
-            return Keywords;
+                   string Name = root.SelectSingleNode("//h1[@class='headline']").InnerText;
 
+                   var node = root.SelectSingleNode("//div[@class='colLeftContentContainer']");
 
-        }
-       
-        
-        public static string springerLink(string uri)
-       {
+                   var Tags = node.Descendants("a");
+
+                   //  var TagArray = Tags.ToArray();
+                   
 
 
-           var html = new HtmlDocument();
+                   // this should run only once
+                   foreach (var tag in Tags)
+                   {
 
-         
+                       if (tag.FirstChild != null)
+                       {
+                           HtmlNode spanNode = tag.FirstChild;
 
-           html.LoadHtml(new WebClient().DownloadString(uri)); // load a string web address
-           // create a root node
-           var root = html.DocumentNode;
+                           if (!String.IsNullOrEmpty(spanNode.InnerText))
+                           {
 
-           var Tags = root.Descendants("div").Where(n => n.GetAttributeValue("id", "").Equals("FOR_AUTHOR_AND_EDITORS"));
+                               if (String.IsNullOrEmpty(Keywords))
+                                   Keywords = spanNode.InnerText;
+                               else
+                               Keywords += ", " + spanNode.InnerText;
+                           }
+                       }
+                   }
+               }
+               catch (Exception ec)
+               {
 
 
-           string SubmitLink = null;
 
-           foreach (var element in Tags)
+               }
+              
+
+
+           }
+           else
            {
 
 
-               var Tag = element.Descendants("a").Where(n => n.GetAttributeValue("class", "").Equals("rightArrow linkToOpenLayer isLink")); 
-                
+               uri = uri + "about";
+
+               try
+               {
+                   html.LoadHtml(new WebClient().DownloadString(uri)); // load a string web address
+
+
+                   // create a root node
+                   var root = html.DocumentNode;
+
+                   var Tags = root.Descendants("div").Where(n => n.GetAttributeValue("class", "").Equals("wrap-inner content"));
+
+                   //  var TagArray = Tags.ToArray();
+
+                   string Name = root.SelectSingleNode("//h1").InnerText;
+                   Name = Name.Replace("About ", "");
+                   // this should run only once
+                   foreach (var tag in Tags)
+                   {
+
+
+                       HtmlNode spanNode = tag.ChildNodes[9];
+                       Keywords = spanNode.InnerText;
+                       break;
+
+                   }
+               }
+               catch (Exception ec)
+               {
+
+
+
+               }
                
-               foreach(var Slink in Tag)
-                {
-                    HtmlAttribute LinkAttribute = Slink.Attributes["href"];
-                    SubmitLink = LinkAttribute.Value; 
-                    break;
-                }
-               break;
+           
+           
            }
 
+           ProcessText();
+
+           return Keywords;
+
+        }
+
+       static void ProcessText()
+       { 
+       
+       
+       
+       
+       }
+
+        public static string springerLink(string uri)
+       {
+
+           string SubmitLink = null;
+
+           var html = new HtmlDocument();
+
+
+           try
+           {
+               html.LoadHtml(new WebClient().DownloadString(uri)); // load a string web address
+               // create a root node
+               var root = html.DocumentNode;
+
+               var Tags = root.Descendants("div").Where(n => n.GetAttributeValue("id", "").Equals("FOR_AUTHOR_AND_EDITORS"));
+
+
+
+
+               foreach (var element in Tags)
+               {
+
+
+                   var Tag = element.Descendants("a").Where(n => n.GetAttributeValue("class", "").Equals("rightArrow linkToOpenLayer isLink"));
+
+
+                   foreach (var Slink in Tag)
+                   {
+                       HtmlAttribute LinkAttribute = Slink.Attributes["href"];
+                       SubmitLink = LinkAttribute.Value;
+                       break;
+                   }
+                   break;
+               }
+           }
+           catch (Exception ex)
+           { }
            return SubmitLink;
        }
 
