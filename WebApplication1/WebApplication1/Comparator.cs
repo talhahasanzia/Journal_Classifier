@@ -9,16 +9,17 @@ namespace WebApplication1
 {
     public class Comparator
     {
-      
 
+        static List<string> words = new List<string>();
+        
 
 
 
             public Comparator()
         {
 
-             
-           
+
+            
             
         
         }
@@ -151,6 +152,66 @@ namespace WebApplication1
                 }
                 return synonymsList;
 
+            }
+
+            public static string ProcessWords(string text)
+            {
+                ///////////////////////// Get words list ////////////////////////////////
+                StreamReader read = new StreamReader(HttpContext.Current.Server.MapPath("~/App_Data/Words.txt"));
+
+                string lineRead = read.ReadLine();
+
+                while (lineRead != null)
+                {
+
+                    words.Add(lineRead);
+                    try
+                    {
+                        lineRead = read.ReadLine();
+                    }
+                    catch (NullReferenceException ec)
+                    {
+                        break;
+                    }
+                }
+                read.Close();
+                read.Dispose();
+                /////////////////////////////////////////////////////////////////////////
+
+                string[] wordsArray = text.Split(new string[] { "\n", "\r\n",",","."," " ,":","(",")","-"},StringSplitOptions.RemoveEmptyEntries);
+
+
+                //////////////////// Check if words is /////////////////////////////////
+                foreach (string word in words)
+                {
+                    for(int count=0; count<wordsArray.Length; count++)
+                    {
+                        if (wordsArray[count].ToLower() == word.ToLower())
+                            wordsArray[count] = "";
+                            
+                    }
+                
+                
+                }
+                ///////////////////////////////////////////////////////////////////////
+
+               
+
+                List<string> listString = wordsArray.ToList();
+
+
+                string stringWord = ",";
+                string emptyWord = "";
+                        
+                
+                listString.Remove(stringWord);
+                listString.Remove(emptyWord);
+                listString.RemoveAll(item => item == "");
+                   
+
+
+                text = String.Join(",",listString.ToArray());
+                return text;
             }
 
     }

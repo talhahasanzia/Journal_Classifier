@@ -52,8 +52,38 @@ namespace WebApplication1
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            string keys = KeywordExtractor.springerKeywords("http://www.springer.com/engineering/civil+engineering/journal/40069");
-            Label1.Text = keys;
+
+            string refined = Comparator.ProcessWords("Robotics and Biomimetics is a high-quality journal that publishes original theoretical and experimental works in Robotics and Biomimetics. Robotics, traditionally as an interdisciplinary area of engineering areas, has been rapidly growing since the 1970s. In recent years, biological science is bringing new breakthroughs in robotics science and technology.Interactions between robotics and biology involve two aspects. On one hand, biological ideas and phenomena are inspiring innovations in every technical areas in robotics including mechanisms, actuation, sensing, control, etc. On the other hand, applying robotics technology to biology is significantly contributing to new understandings of biological systems and their behaviors.");
+
+
+            Label1.Text = "Robotics and Biomimetics is a high-quality journal that publishes original theoretical and experimental works in Robotics and Biomimetics. Robotics, traditionally as an interdisciplinary area of engineering areas, has been rapidly growing since the 1970s. In recent years, biological science is bringing new breakthroughs in robotics science and technology.Interactions between robotics and biology involve two aspects. On one hand, biological ideas and phenomena are inspiring innovations in every technical areas in robotics including mechanisms, actuation, sensing, control, etc. On the other hand, applying robotics technology to biology is significantly contributing to new understandings of biological systems and their behaviors." + "<br/><br/>New Text:<br/>";
+
+            string[] wordsArray = refined.Split(',');
+
+            foreach (string word in wordsArray)
+            {
+
+                if (!(String.IsNullOrEmpty(word) || String.IsNullOrWhiteSpace(word)))
+                {
+                    Label1.Text += "<br/>" + word;
+                
+                }
+            
+            }
+
+            //Journal[] journals = new Journal[links.Count];
+
+
+            //for (int i = 0; i < journals.Length; i++)
+            //{ 
+            
+            
+            
+            
+            //}
+
+            //string keys = KeywordExtractor.springerKeywords("http://www.springer.com/engineering/civil+engineering/journal/40069");
+            //Label1.Text = keys;
         }
     }
 }
