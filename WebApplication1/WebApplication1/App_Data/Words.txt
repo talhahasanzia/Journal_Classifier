@@ -1,0 +1,189 @@
+﻿aboard
+about
+above
+across
+after
+against
+along
+amid
+among
+anti
+around
+as
+at
+before
+behind
+below
+beneath
+beside
+besides
+between
+beyond
+but
+by
+concerning
+considering
+despite
+down
+during
+except
+excepting
+excluding
+following
+for
+from
+in
+inside
+into
+like
+minus
+near
+of
+off
+on
+onto
+opposite
+outside
+over
+past
+per
+plus
+regarding
+round
+save
+since
+than
+through
+to
+toward
+towards
+under
+underneath
+unlike
+until
+up
+upon
+versus
+via
+with
+within
+without
+after
+although
+and
+as
+as far as
+as if
+as long as
+as soon as
+as though
+as well as
+because
+before
+but
+by the time
+even if
+even though
+for
+how
+if
+in as much as
+in case
+if only
+in addition to
+in order that
+just as
+lest
+no matter how
+nor
+now that
+once
+only if
+or
+provided that
+since
+so
+so that
+supposing that
+than
+that
+though
+till
+unless
+until
+when
+whenever
+where
+whereas
+wherever
+whether
+while
+yet
+is
+am
+are
+a
+an
+the
+has
+have
+had
+was
+were
+been
+he
+she
+it
+they
+you
+your
+i
+them
+will
+shall
+can
+do
+would
+should
+could
+did
+done
+abroad
+anywhere
+downstairs
+here
+home
+in
+nowhere
+outside
+somewhere
+there
+underground
+upstairs
+so
+so that
+to
+in order to
+because
+since
+always
+every
+never
+often
+rarely
+seldom
+sometimes
+usually
+already
+during
+finally
+just
+later
+now
+recently
+soon
+then
+tomorrow
+when
+while
+yesterday

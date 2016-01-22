@@ -36,6 +36,36 @@ namespace WebApplication1
                    // create a root node
                    var root = html.DocumentNode;
 
+                   // Submit Online
+                   /////////////////////////// GET Submit Link ////////////////////////
+                   var spans = root.Descendants("span");
+                   HtmlNode linkNode = null;
+
+                   foreach (var item in spans)
+                   {
+
+                       if (item.InnerText == "Submit Online")
+                       {
+                           linkNode = item;
+                           break;
+
+                       }
+
+
+                   }
+
+
+
+                   string SubmitLink = linkNode.ParentNode.Attributes["href"].Value;
+
+                   ////////////////////////////// end submit link ///////////////////////
+                   //////////////////////////////////////////////////////////////////////
+
+                   
+                   
+                   
+                   
+                   
                    string Name = root.SelectSingleNode("//h1[@class='headline']").InnerText;
 
                    var node = root.SelectSingleNode("//div[@class='colLeftContentContainer']");
@@ -43,8 +73,8 @@ namespace WebApplication1
                    var Tags = node.Descendants("a");
 
                    //  var TagArray = Tags.ToArray();
-                   
 
+               
 
                    // this should run only once
                    foreach (var tag in Tags)
@@ -85,16 +115,56 @@ namespace WebApplication1
                {
                    html.LoadHtml(new WebClient().DownloadString(uri)); // load a string web address
 
-
+                   
                    // create a root node
                    var root = html.DocumentNode;
 
+
+                   /////////////////////////// GET Submit Link ////////////////////////
+                   var spans = root.Descendants("span");
+                   HtmlNode linkNode = null;
+
+                   foreach (var item in spans)
+                   {
+
+                       if (item.InnerText == "Submit a manuscript")
+                       {
+                           linkNode = item;
+                           break;
+
+                       }
+
+
+                   }
+
+
+
+                   string SubmitLink = linkNode.ParentNode.Attributes["href"].Value;
+                   
+                   ////////////////////////////// end submit link ///////////////////////
+                   //////////////////////////////////////////////////////////////////////
+
+
+
+                   string Website = "Springer";
+                   
+
+                   ///////////////////////////// Get Aims and scope paragraph ie keywords data ///////////////////
+
                    var Tags = root.Descendants("div").Where(n => n.GetAttributeValue("class", "").Equals("wrap-inner content"));
 
+
+                
+                   
                    //  var TagArray = Tags.ToArray();
 
                    string Name = root.SelectSingleNode("//h1").InnerText;
                    Name = Name.Replace("About ", "");
+
+
+                  
+                   
+                   
                    // this should run only once
                    foreach (var tag in Tags)
                    {
@@ -109,14 +179,14 @@ namespace WebApplication1
                catch (Exception ec)
                {
 
-
+                   string ecp = ec.Message;
 
                }
                
            
            
            }
-
+           /////////////////////////////////////////////// end keywords ///////////////////////////////////////
            ProcessText();
 
            return Keywords;

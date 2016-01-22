@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Web;
 
 namespace WebApplication1
@@ -68,5 +70,88 @@ namespace WebApplication1
                 }
                 return Matches.ToArray();
             }
+
+
+            public static List<string> synonyms(string word)
+            {
+                string line;
+                string inspeccontrolledindex = "<div class=\"relevancy-list\">";
+                var colorOfBox = "#fcbb45";
+                string end = "</div>";
+                bool printNow = false;
+                bool hasDarkYellow = false;
+                string datakeyword = "<span class=\"text\">";
+                int counter = 0;
+                List<string> synonymsList = new List<string>();
+                string path = HttpContext.Current.Server.MapPath("~/App_Data/synonyms.txt");
+                Stream writer = new FileStream(path, FileMode.OpenOrCreate);
+                writer.Close();
+
+                using (WebClient client = new WebClient())
+                {
+
+
+                    try
+                    {
+
+                        client.DownloadFile("http://www.thesaurus.com/browse/" + word + "?s=t", path);
+                    }
+                    catch (WebException ex)
+                    {
+                        System.Diagnostics.Debug.WriteLine(ex.Message);
+
+                    }
+
+
+                    foreach (var linee in File.ReadLines(path))
+                    {
+                        //Console.WriteLine(linee);
+                        if (printNow)
+                        {
+                            if (linee.Contains(end))
+                            {
+                                printNow = false;
+                                counter++;
+                            }
+                        }
+                        if (printNow)
+                        {
+                            if (linee.Contains(colorOfBox))
+                            {
+                                // Debug.WriteLine(linee);
+                                hasDarkYellow = true;
+
+                            }
+                            if (linee.Contains(datakeyword) && hasDarkYellow == true)
+                            {
+
+                                var a = linee.IndexOf("\"text\">");
+                                var b = linee.LastIndexOf("/span>");
+                                var c = linee.Substring(a, b - a);
+                                var d = c.IndexOf('>');
+                                var e = c.IndexOf('<');
+                                var f = c.Substring(d, e - d);
+                                // c.
+
+                                Console.WriteLine(f.Trim('>'));
+                                synonymsList.Add(f.Trim('>'));
+                                hasDarkYellow = false;
+
+                            }
+
+
+                        }
+                        if ((linee.Contains(inspeccontrolledindex)) && counter == 0)
+                            printNow = true;
+
+
+                    }
+
+
+                }
+                return synonymsList;
+
+            }
+
     }
 }

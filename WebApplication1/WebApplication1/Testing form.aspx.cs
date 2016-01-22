@@ -52,7 +52,7 @@ namespace WebApplication1
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            string keys = KeywordExtractor.springerKeywords("http://www.viejournal.com/");
+            string keys = KeywordExtractor.springerKeywords("http://www.springer.com/engineering/civil+engineering/journal/40069");
             Label1.Text = keys;
         }
     }

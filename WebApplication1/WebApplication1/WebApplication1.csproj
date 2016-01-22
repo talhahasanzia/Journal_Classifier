@@ -65,6 +65,8 @@
     <Content Include="Admin.aspx" />
     <Content Include="App_Data\KeywordsDB.sdf" />
     <Content Include="App_Data\Links.txt" />
+    <Content Include="App_Data\synonyms.txt" />
+    <Content Include="App_Data\Words.txt" />
     <Content Include="css\bootstrap.css" />
     <Content Include="css\bootstrap.min.css" />
     <Content Include="css\Custom.css" />
