@@ -37,15 +37,21 @@ namespace WebApplication1
                 string tableName = "Journal_Data";
                 string ConString = @"Data Source=|DataDirectory|KeywordsDB.sdf;";
 
-                 SQLCon.ConnectionString = ConString; 
+                 SQLCon.ConnectionString = ConString;
 
-              
-               
+                 SQLdset = new DataSet();
+                 SQLAdp = new SqlCeDataAdapter();
+                
                 SQLCon.Open();
 
-                string Comm = "SELECT * FROM Journal_Data;";
+                string Comm = "SELECT DISTINCT JournalName FROM Journal_Data";
 
+                SqlCeCommand command = new SqlCeCommand(Comm);
+                command.Connection = SQLCon;
+                SQLAdp.SelectCommand = command;
+                
                 SQLAdp.Fill(SQLdset,tableName);
+                
 
                 SQLCon.Close();
 
@@ -61,13 +67,28 @@ namespace WebApplication1
 
                     for (int i = 0; i < j ; i++)
                     {
+                        DataSet SQLdset2=new DataSet();
+                        SQLCon.Open();
+
+                        Comm = "SELECT * FROM Journal_Data Where JournalName='" + SQLdset.Tables[tableName].Rows[i]["JournalName"].ToString() + "';"; ;
+
+                        SqlCeDataAdapter SQLAdp2 = new SqlCeDataAdapter(); ;
+                        SqlCeCommand command2 = new SqlCeCommand(Comm);
+                        command2.Connection = SQLCon;
+                        SQLAdp2.SelectCommand = command2;
+                
+
+                        SQLAdp2.Fill(SQLdset2, tableName);
+
+                        SQLCon.Close();
+
                         journalData[i] = new Journal();
 
-                        journalData[i].Name = SQLdset.Tables[tableName].Rows[i]["JournalName"].ToString();
-                        journalData[i].Link = SQLdset.Tables[tableName].Rows[i]["JournalLink"].ToString();
-                        journalData[i].Website = SQLdset.Tables[tableName].Rows[i]["Website"].ToString();
-                        journalData[i].Keywords = SQLdset.Tables[tableName].Rows[i]["Keywords"].ToString();
-                        journalData[i].Submit = SQLdset.Tables[tableName].Rows[i]["SubmitLink"].ToString();
+                        journalData[i].Name = SQLdset2.Tables[tableName].Rows[0]["JournalName"].ToString();
+                        journalData[i].Link = SQLdset2.Tables[tableName].Rows[0]["JournalLink"].ToString();
+                        journalData[i].Website = SQLdset2.Tables[tableName].Rows[0]["Website"].ToString();
+                        journalData[i].Keywords = SQLdset2.Tables[tableName].Rows[0]["Keywords"].ToString();
+                        journalData[i].Submit = SQLdset2.Tables[tableName].Rows[0]["SubmitLink"].ToString();
                        
                         
                     }

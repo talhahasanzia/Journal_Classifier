@@ -15,37 +15,8 @@ namespace WebApplication1
         
         protected void Page_Load(object sender, EventArgs e)
         {
-            StreamReader read = new StreamReader(HttpContext.Current.Server.MapPath("~/App_Data/Links.txt"));
 
-            string lineRead = read.ReadLine();
-
-            while (lineRead != null)
-            {
-
-                links.Add(lineRead);
-                try
-                {
-                    lineRead = read.ReadLine();
-                }
-                catch(NullReferenceException ec)
-                {
-                    break;
-                }
-            }
-            read.Close();
-            read.Dispose();
-
-
-            Label1.Text = "Array loaded succesfully";
-
-
-            foreach (string link in links)
-            {
-
-
-                Label1.Text += "<br/>" + link;
-            
-            }
+           
             
 
         }
@@ -53,37 +24,17 @@ namespace WebApplication1
         protected void Button1_Click(object sender, EventArgs e)
         {
 
-            string refined = Comparator.ProcessWords("Robotics and Biomimetics is a high-quality journal that publishes original theoretical and experimental works in Robotics and Biomimetics. Robotics, traditionally as an interdisciplinary area of engineering areas, has been rapidly growing since the 1970s. In recent years, biological science is bringing new breakthroughs in robotics science and technology.Interactions between robotics and biology involve two aspects. On one hand, biological ideas and phenomena are inspiring innovations in every technical areas in robotics including mechanisms, actuation, sensing, control, etc. On the other hand, applying robotics technology to biology is significantly contributing to new understandings of biological systems and their behaviors.");
 
 
-            Label1.Text = "Robotics and Biomimetics is a high-quality journal that publishes original theoretical and experimental works in Robotics and Biomimetics. Robotics, traditionally as an interdisciplinary area of engineering areas, has been rapidly growing since the 1970s. In recent years, biological science is bringing new breakthroughs in robotics science and technology.Interactions between robotics and biology involve two aspects. On one hand, biological ideas and phenomena are inspiring innovations in every technical areas in robotics including mechanisms, actuation, sensing, control, etc. On the other hand, applying robotics technology to biology is significantly contributing to new understandings of biological systems and their behaviors." + "<br/><br/>New Text:<br/>";
+            Journal[] journals = DataManager.GetJournalData();
 
-            string[] wordsArray = refined.Split(',');
-
-            foreach (string word in wordsArray)
+            for (int i = 0; i < journals.Length; i++)
             {
 
-                if (!(String.IsNullOrEmpty(word) || String.IsNullOrWhiteSpace(word)))
-                {
-                    Label1.Text += "<br/>" + word;
-                
-                }
+                Label1.Text += "<br/>" + journals[i].Name;
             
             }
-
-            //Journal[] journals = new Journal[links.Count];
-
-
-            //for (int i = 0; i < journals.Length; i++)
-            //{ 
-            
-            
-            
-            
-            //}
-
-            //string keys = KeywordExtractor.springerKeywords("http://www.springer.com/engineering/civil+engineering/journal/40069");
-            //Label1.Text = keys;
+           
         }
     }
 }

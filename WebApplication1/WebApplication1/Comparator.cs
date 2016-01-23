@@ -200,12 +200,7 @@ namespace WebApplication1
                 List<string> listString = wordsArray.ToList();
 
 
-                string stringWord = ",";
-                string emptyWord = "";
-                        
-                
-                listString.Remove(stringWord);
-                listString.Remove(emptyWord);
+               
                 listString.RemoveAll(item => item == "");
                    
 

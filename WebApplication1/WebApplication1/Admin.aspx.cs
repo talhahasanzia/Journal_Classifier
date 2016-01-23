@@ -29,15 +29,7 @@ namespace WebApplication1
 
             setValues();
 
-            if (DropDownList1.SelectedValue == "Springer")
-                journalData = JournalLinks.FromSpringer();
-            else if (DropDownList1.SelectedValue == "ACM")
-                journalData = JournalLinks.FromACM();
-            else if (DropDownList1.SelectedValue == "Elsevier")
-                keywords = JournalLinks.FromElsevier("", GetDepth());
-
-            else
-                Label1.Text = "Error Occured";
+           
 
 
 
