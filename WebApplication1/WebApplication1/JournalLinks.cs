@@ -14,7 +14,52 @@ namespace WebApplication1
 
         static List<string> FinalKeywords = new List<string>();
 
-       public static Journal[] FromSpringer()
+
+
+        public static string[] OpenAccessLinks()
+        {
+            string[] links=null;
+
+
+
+            HtmlDocument doc = new HtmlDocument();
+            //doc.LoadHtml(new WebClient().DownloadString();
+           
+            
+            doc.Load(HttpContext.Current.Server.MapPath("~/App_Data/Emerald Insight Browse Journals and Books.htm"));
+
+            var rootNode = doc.DocumentNode;
+
+
+            var titles = rootNode.Descendants("tr").Where(n => n.GetAttributeValue("class", "").Equals("browseItem"));
+
+            links = new string[titles.ToArray().Length];
+
+            int i = 0;
+            foreach (var node in titles)
+            {
+
+
+
+                HtmlNode third = node.ChildNodes[3];
+
+                var col = third.Descendants("a").ToArray();
+                string link = col[0].Attributes["href"].Value;
+                link = link.Replace("/loi/", "");
+
+                links[i] = "http://emeraldgrouppublishing.com/products/journals/journals.htm?id=" + link;
+                i++;
+            
+            
+            
+            }
+
+            return links;
+        
+        }
+        
+        
+        public static Journal[] FromSpringer()
         {
 
             List<Journal> JournalsFromSpringer = new List<Journal>();

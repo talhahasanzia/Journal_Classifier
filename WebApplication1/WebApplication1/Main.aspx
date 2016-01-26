@@ -84,7 +84,7 @@
                         <span class="skills" >Find most suitable category and website for your journal</span>
                     </div>
                     <div class="form-group col-xs-12 floating-label-form-group controls">
-                                <label>Abstract</label><asp:TextBox class="form-control" ID="TextBox1" runat="server">Post abstract here</asp:TextBox>
+                                <label>Abstract</label><asp:TextBox class="form-control" ID="TextBox1" TextMode="MultiLine" runat="server" AutoPostBack="True" OnTextChanged="TextBox1_TextChanged">Post abstract here</asp:TextBox>
                                
                                 <p class="help-block text-danger"></p>
                             </div>
@@ -104,10 +104,10 @@
             </div>
             <div class="row">
                 <div class="col-lg-4 col-lg-offset-2 form-group col-xs-12 floating-label-form-group controls">
-                    <asp:TextBox class="form-control" ID="TextBox2" runat="server">Keywords</asp:TextBox>
+                    <asp:TextBox class="form-control" ID="TextBox2" TextMode="MultiLine" runat="server" AutoPostBack="True" OnTextChanged="TextBox2_TextChanged">Keywords</asp:TextBox>
                 </div>
                 <div class="col-lg-4">
-                    <p>Enter keywords that best match your abstract.</p>
+                    <asp:Label ID="suggest" runat="server" Text="Enter keywords that best match your abstract." TextMode="MultiLine" Font-Names="Calibri" Font-Size="Large"></asp:Label>
                 </div>
                 
             </div>
@@ -115,7 +115,7 @@
         </div>
     </section>
         <div class="form-group col-xs-12" style="text-align:center; margin-top:10px; font-family:Verdana">
-            <asp:Button ID="Button1" runat="server" Text="Check Results" BackColor="#18BC9C" BorderColor="#18BC9C" ForeColor="White" Height="65px" OnClick="LinkButton1_Click" Width="183px" />
+            <asp:Button ID="Button1" runat="server" Text="Check Results" BackColor="#18BC9C" BorderColor="#18BC9C" ForeColor="White" Height="65px" OnClick="LinkButton1_Click" Width="183px" Font-Bold="False" Font-Names="Verdana" Font-Size="Large" />
                             </div>
     <!-- Portfolio Grid Section -->
     <section id="portfolio">
@@ -223,7 +223,7 @@
                         <h3>Find on GIT</h3>
                         <ul class="list-inline">
                             <li>
-                                <a href="https://github.com/talhahasanzia/JournalClassifier" class="btn-social btn-outline"><i class="fa fa-fw fa-github"> Git</i></a>
+                                <a href="https://github.com/talhahasanzia/Journal_Classifier" class="btn-social btn-outline"><i class="fa fa-fw fa-github"> Git</i></a>
                                 
                             </li>
                             

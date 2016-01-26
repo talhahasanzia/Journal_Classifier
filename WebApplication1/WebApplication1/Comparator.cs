@@ -178,7 +178,7 @@ namespace WebApplication1
                 read.Dispose();
                 /////////////////////////////////////////////////////////////////////////
 
-                string[] wordsArray = text.Split(new string[] { "\n", "\r\n",",","."," " ,":","(",")","-"},StringSplitOptions.RemoveEmptyEntries);
+                string[] wordsArray = text.Split(new string[] { "\n", "\r\n","/","&",",",";","."," " ,":","(",")","-"},StringSplitOptions.RemoveEmptyEntries);
 
 
                 //////////////////// Check if words is /////////////////////////////////
@@ -188,6 +188,9 @@ namespace WebApplication1
                     {
                         if (wordsArray[count].ToLower() == word.ToLower())
                             wordsArray[count] = "";
+
+
+
                             
                     }
                 
@@ -208,6 +211,129 @@ namespace WebApplication1
                 text = String.Join(",",listString.ToArray());
                 return text;
             }
+
+            public static List<string> GetSynonyms(List<string> words)
+            {
+               
+                string inspeccontrolledindex = "<div class=\"relevancy-list\">";
+                var colorOfBox = "#fcbb45";
+                string end = "</div>";
+                bool printNow = false;
+                bool hasDarkYellow = false;
+                string datakeyword = "<span class=\"text\">";
+                int counter = 0;
+                List<string> synonymsList = new List<string>();
+                string path = HttpContext.Current.Server.MapPath("~/App_Data/synonyms.txt");
+                Stream writer = new FileStream(path, FileMode.Create);
+                writer.Close();
+
+                using (WebClient client = new WebClient())
+                {
+
+
+                    try
+                    {
+                        foreach (var word in words)
+                        {
+
+                            client.DownloadFile("http://www.thesaurus.com/browse/" + word + "?s=t", path);
+                            counter = 0;
+                            foreach (var linee in File.ReadLines(path))
+                            {
+                                //Console.WriteLine(linee);
+                                if (printNow)
+                                {
+                                    if (linee.Contains(end))
+                                    {
+                                        printNow = false;
+                                        counter++;
+
+                                    }
+                                }
+                                if (printNow)
+                                {
+                                    if (linee.Contains(colorOfBox))
+                                    {
+                                        // Debug.WriteLine(linee);
+                                        hasDarkYellow = true;
+
+                                    }
+                                    if (linee.Contains(datakeyword) && hasDarkYellow == true)
+                                    {
+
+                                        var a = linee.IndexOf("\"text\">");
+                                        var b = linee.LastIndexOf("/span>");
+                                        var c = linee.Substring(a, b - a);
+                                        var d = c.IndexOf('>');
+                                        var e = c.IndexOf('<');
+                                        var f = c.Substring(d, e - d);
+                                        // c.
+
+                                        Console.WriteLine(f.Trim('>'));
+
+                                        synonymsList.Add(f.Trim('>'));
+                                        hasDarkYellow = false;
+
+                                    }
+
+
+                                }
+                                if ((linee.Contains(inspeccontrolledindex)) && counter == 0)
+                                    printNow = true;
+
+
+                            }
+
+
+
+                        }
+                    }
+                    catch (WebException ex)
+                    {
+                        System.Diagnostics.Debug.WriteLine(ex.Message);
+
+                    }
+
+                }
+                return synonymsList;
+
+            }
+            public static float GetStats(string[] journalKeywords, string[] userKeywords)
+            {
+                int count = 0;
+                //  float percentageOfMatchedWords;
+                float totalNumber = userKeywords.Length;
+                float percentageOfMatchedKeywWords;
+                
+                
+                
+                foreach(string jKeywords in journalKeywords)
+                {
+                    foreach(string uKeywords in userKeywords)
+                    {
+
+                        if (uKeywords.Contains(jKeywords) || jKeywords.Contains(uKeywords))
+                        {
+
+                            count++;
+                           
+                        }
+                    }
+
+
+
+
+                }
+                percentageOfMatchedKeywWords = (float)count / totalNumber * 100f;
+                
+
+
+
+
+
+                return percentageOfMatchedKeywWords;
+            }
+
 
     }
 }

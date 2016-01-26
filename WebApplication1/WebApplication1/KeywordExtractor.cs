@@ -1,6 +1,7 @@
 ﻿using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -206,9 +207,83 @@ namespace WebApplication1
 
         }
 
-      
 
-       
+
+       //public static Journal Emerald(string url)
+       //{
+
+         
+           
+       //    Journal journal = new Journal();
+
+       //    HtmlDocument doc = new HtmlDocument(); ;
+
+       //    doc.LoadHtml(new WebClient().DownloadString(url));
+
+
+       //    string keywords="";
+       //    var rootNode = doc.DocumentNode;
+
+
+       //    var headings= rootNode.Descendants("h3");
+
+       //    var paras = rootNode.Descendants("p");
+           
+       //    foreach(var heading in headings)
+       //    {
+
+
+
+       //        if (heading.InnerText == "Coverage" || heading.InnerText.Contains("Coverage"))
+       //        {
+       //            HtmlNode parent = heading.ParentNode;
+       //            var uls = parent.Descendants("ul");
+
+
+       //            if (uls.ToArray().Length > 0)
+       //            {
+
+       //                HtmlNode ul = uls.ToArray()[0];
+
+       //                var li=ul.Descendants("li");
+
+       //                foreach (var node in li)
+       //                {
+
+       //                    keywords += node.InnerText;
+                       
+                       
+       //                }
+
+
+                   
+       //            }
+
+       //            break;
+       //        }
+       //        else if (heading.InnerText.Contains("Scope"))
+       //        {
+       //            HtmlNode firstsib = heading.NextSibling;
+       //            HtmlNode secondsib = firstsib.NextSibling;
+
+       //            break;
+       //        }
+           
+       //    }
+
+
+       //    journal.Keywords = keywords;
+
+       //    var h1 = rootNode.Descendants("h1");
+       //    HtmlNode head = h1.ToArray()[0];
+       //    journal.Name = head.InnerText;
+
+       //    journal.Website = "Emerald";
+       //    journal.Link = url;
+       //    journal.Submit = "http://emeraldgrouppublishing.com/services/publishing/index.htm";
+
+       //    return journal;
+       //}
        
 
 

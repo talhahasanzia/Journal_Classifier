@@ -134,7 +134,7 @@ namespace WebApplication1
                             
 
                            
-                                sql = "INSERT INTO " + tableName + "(JournalName, JournalLink, Keywords, Website, SubmitLink) VALUES('" + journalDataList[i].Name + "','" + journalDataList[i].Link + "','" + journalDataList[i].Keywords.ToLower() + "','" + journalDataList[i].Website + "','" + journalDataList[i].Submit + "');";
+                                sql = "INSERT INTO Journal_Data(JournalName, JournalLink, Keywords, Website, SubmitLink) VALUES('" + journalDataList[i].Name + "','" + journalDataList[i].Link + "','" + journalDataList[i].Keywords.ToLower() + "','" + journalDataList[i].Website + "','" + journalDataList[i].Submit + "');";
 
                            
 

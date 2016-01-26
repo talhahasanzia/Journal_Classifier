@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Admin.aspx" />
+    <Content Include="App_Data\Emerald Insight Browse Journals and Books.htm" />
     <Content Include="App_Data\KeywordsDB.sdf" />
     <Content Include="App_Data\Links.txt" />
     <Content Include="App_Data\synonyms.txt" />

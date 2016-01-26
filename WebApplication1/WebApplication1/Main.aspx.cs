@@ -9,31 +9,145 @@ namespace WebApplication1
 {
     public partial class Main : System.Web.UI.Page
     {
+
+       
+
         protected void Page_Load(object sender, EventArgs e)
         {
-
+           
         }
 
         protected void LinkButton1_Click(object sender, EventArgs e)
         {
-           char[] trimmer={' '};
+
+
+            RunAnalysis();
+           
+         
+        }
+
+
+
+        void RunAnalysis()
+        {
+
+
+
+            string keywords = TextBox2.Text;
+
+            keywords = Comparator.ProcessWords(keywords);
+            string[] stringSeparators = new string[] { "," };
             
-            List<string> keywords = TextBox2.Text.Split(',').ToList();
+            
+            Journal[] journalData = DataManager.GetJournalData();
 
-            List<string> filteredKeywords = new List<string>();
+            Journal Springer = new Journal();
+            Journal ACM = new Journal();
+            Journal Emerald = new Journal();
 
-            foreach (string word in keywords)
+
+            float springerMatch=0, acmMatch=0, emeraldMatch=0;
+
+            foreach (Journal j in journalData)
             {
 
-                string temp = word.ToLower();
-                temp = temp.TrimEnd(trimmer);
-                temp = temp.TrimStart(trimmer);
-                filteredKeywords.Add(temp);
+                if (j.Website == "Springer")
+                {
+
+                    string[] keys = keywords.Split(stringSeparators, StringSplitOptions.RemoveEmptyEntries);
+                    string[] keySyn = Comparator.GetSynonyms(keys.ToList()).ToArray();
+
+                    string[] journalKeys = j.Keywords.Split(stringSeparators, StringSplitOptions.RemoveEmptyEntries);
+                    string[] jourSyn = Comparator.GetSynonyms(journalKeys.ToList()).ToArray();
+
+
+                    float match = Comparator.GetStats(jourSyn, keySyn);
+
+                    if (match > springerMatch)
+                    {
+
+                        springerMatch = match;
+                        Springer = j;
+                    
+                    
+                    }
+                
+                
+                }
+                if (j.Website == "ACM")
+                {
+
+
+                    string[] keys = keywords.Split(stringSeparators, StringSplitOptions.RemoveEmptyEntries);
+                    string[] keySyn = Comparator.GetSynonyms(keys.ToList()).ToArray();
+
+                    string[] journalKeys = j.Keywords.Split(stringSeparators, StringSplitOptions.RemoveEmptyEntries);
+                    string[] jourSyn = Comparator.GetSynonyms(journalKeys.ToList()).ToArray();
+
+
+                    float match = Comparator.GetStats(jourSyn, keySyn);
+
+                    if (match > acmMatch)
+                    {
+
+                        acmMatch = match;
+                        ACM = j;
+
+
+                    }
+
+                }
+                if (j.Website == "Emerald")
+                {
+
+
+                    string[] keys = keywords.Split(stringSeparators, StringSplitOptions.RemoveEmptyEntries);
+                    string[] keySyn = Comparator.GetSynonyms(keys.ToList()).ToArray();
+
+                    string[] journalKeys = j.Keywords.Split(stringSeparators, StringSplitOptions.RemoveEmptyEntries);
+                    string[] jourSyn = Comparator.GetSynonyms(journalKeys.ToList()).ToArray();
+
+
+                    float match = Comparator.GetStats(jourSyn, keySyn);
+
+                    if (match > emeraldMatch)
+                    {
+
+                        emeraldMatch = match;
+                       Emerald = j;
+
+
+                    }
+
+                }
+            
             
             
             }
+        
+        
+        
+        
+        }
+
+
+        protected void TextBox2_TextChanged(object sender, EventArgs e)
+        {
+
            
-            ; ;
+        }
+
+       
+
+        protected void TextBox1_TextChanged(object sender, EventArgs e)
+        {
+            
+            string suggestedWords = Comparator.ProcessWords(TextBox1.Text);
+            suggest.Text = "Suggested Keywords: " + suggestedWords;
+
+
+           
+            
         }
     }
 }
