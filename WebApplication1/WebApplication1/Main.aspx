@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-
+    <link href="css/Custom.css" rel="stylesheet" />
     <title>Journal Classifier</title>
 
     <!-- Bootstrap Core CSS - Uses Bootswatch Flatly Theme: http://bootswatch.com/flatly/ -->
@@ -104,10 +104,11 @@
             </div>
             <div class="row">
                 <div class="col-lg-4 col-lg-offset-2 form-group col-xs-12 floating-label-form-group controls">
-                    <asp:TextBox class="form-control" ID="TextBox2" TextMode="MultiLine" runat="server" AutoPostBack="True" >Keywords</asp:TextBox>
+                    <asp:TextBox class="form-control" ID="TextBox2" TextMode="MultiLine" runat="server"  >Keywords</asp:TextBox>
                 </div>
                 <div class="col-lg-4">
-                    <asp:Label ID="suggest" runat="server" Text="Enter keywords that best match your abstract." TextMode="MultiLine" Font-Names="Calibri" Font-Size="Large"></asp:Label>
+                    <span class="skills">Suggested Keywords</span>
+                   <asp:TextBox class="form-control" ID="TextBox3" TextMode="MultiLine" runat="server"  ></asp:TextBox>
                 </div>
                 
             </div>
@@ -115,40 +116,49 @@
         </div>
     </section>
         <div class="form-group col-xs-12" style="text-align:center; margin-top:10px; font-family:Verdana">
-            <asp:Button ID="Button1" runat="server" Text="Check Results" BackColor="#18BC9C" BorderColor="#18BC9C" ForeColor="White" Height="65px" OnClick="LinkButton1_Click" Width="183px" Font-Bold="False" Font-Names="Verdana" Font-Size="Large" />
+            <asp:Button ID="Button1"  CssClass="corner-radius-button" runat="server" Text="Check Results" BackColor="#18BC9C" BorderColor="#18BC9C" ForeColor="White" Height="70px" OnClick="LinkButton1_Click" Width="183px" Font-Bold="False" Font-Names="Verdana" Font-Size="Large" />
                             </div>
     <!-- Portfolio Grid Section -->
     <section id="portfolio">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h2>results</h2>
+                    <h2>BEST MATCHES</h2>
                     <hr class="star-primary">
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-4 portfolio-item"  style=" border-style:double;  border-width:thick; border-color:aliceblue; border-radius:25px; text-align:center; font-family:Verdana; margin:10px,10px,10px,10px; padding:5px,5px,5px,5px;" >
+                <div class="col-sm-4 portfolio-item"   style="height:200px; border-style:double; border-color:#808080;  border-width:thick;  border-radius:25px; text-align:center; font-family:Verdana; margin:10px,10px,10px,10px; padding:5px,5px,5px,5px;" >
                    <asp:Label ID="Label1" runat="server"  Text="Springer" Font-Size="Large" ForeColor="White"></asp:Label><br>
                     <br/>
-                                        <br/>
+                                       <span  ><asp:Label ID="Journal1Name" runat="server" Text="Journal1"></asp:Label></span>
                      <br/>
+                       <asp:Button ID="Journal1Details"  CssClass="corner-radius-button" runat="server"  Text="More Details" BackColor="#18BC9C" BorderColor="#18BC9C" ForeColor="White" Height="30px"  Width="130px" Font-Bold="False" Font-Names="Verdana" Font-Size="Small" OnClick="Journal1Details_Click" /> 
+                                <asp:Button ID="Journal1Submit" CssClass="corner-radius-button" runat="server" Text="Submit Now" BackColor="#18BC9C" BorderColor="#18BC9C" ForeColor="White" Height="30px"  Width="130px" Font-Bold="False" Font-Names="Verdana" Font-Size="Small" OnClick="Journal1Submit_Click" />
+                            
                      <br/>
                                         <br/>
                 </div>
-                <div class="col-sm-4 portfolio-item" style=" border-style:double;  border-width:thick; border-color:aliceblue; border-radius:25px; text-align:center; font-family:Verdana;  margin:10px,10px,10px,10px; padding:5px,5px,5px,5px;">
+                <div class="col-sm-4 portfolio-item" style="height:200px; border-style:double; border-color:#808080;  border-width:thick;  border-radius:25px; text-align:center; font-family:Verdana;  margin:10px,10px,10px,10px; padding:5px,5px,5px,5px;">
                    <asp:Label ID="Label2" runat="server"  Text="ACM" Font-Size="Large" ForeColor="White"></asp:Label><br>
                    <br/>
-                                        <br/>
+                                        <span  ><asp:Label ID="Journal2Name" runat="server" Text="Journal2"></asp:Label></span>
                      <br/>
+                       <asp:Button ID="Journal2Details" CssClass="corner-radius-button"  runat="server"  Text="More Details" BackColor="#18BC9C" BorderColor="#18BC9C" ForeColor="White" Height="30px"  Width="130px" Font-Bold="False" Font-Names="Verdana" Font-Size="Small" OnClick="Journal2Details_Click" /> 
+                                <asp:Button ID="Journal2Submit" CssClass="corner-radius-button" runat="server" Text="Submit Now" BackColor="#18BC9C" BorderColor="#18BC9C" ForeColor="White" Height="30px"  Width="130px" Font-Bold="False" Font-Names="Verdana" Font-Size="Small" OnClick="Journal2Submit_Click" />
+                            
                      <br/>
                                         <br/>
                 </div>
                
-                <div class="col-sm-4 portfolio-item" style="border-style:double;  border-width:thick; border-color:aliceblue; border-radius:25px; text-align:center; font-family:Verdana;  margin:10px,10px,10px,10px; padding:5px,5px,5px,5px;">
+                <div class="col-sm-4 portfolio-item" style="height:200px; border-style:double;  border-color:#808080; border-width:thick;  border-radius:25px; text-align:center; font-family:Verdana;  margin:10px,10px,10px,10px; padding:5px,5px,5px,5px;">
                    <asp:Label ID="Label6" runat="server"  Text="ACM" Font-Size="Large" ForeColor="White"></asp:Label><br>
                    <br/>
-                                        <br/>
+                                        <span  > <asp:Label ID="Journal3Name" runat="server" Text="Journal3"></asp:Label></span>
                      <br/>
+                                <asp:Button ID="Journal3Details" CssClass="corner-radius-button" runat="server"  Text="More Details" BackColor="#18BC9C" BorderColor="#18BC9C" ForeColor="White" Height="30px"  Width="130px" Font-Bold="False" Font-Names="Verdana" Font-Size="Small" OnClick="Journal3Details_Click" /> 
+                                <asp:Button ID="Journal3Submit" CssClass="corner-radius-button" runat="server" Text="Submit Now" BackColor="#18BC9C" BorderColor="#18BC9C" ForeColor="White" Height="30px"  Width="130px" Font-Bold="False" Font-Names="Verdana" Font-Size="Small" OnClick="Journal3Submit_Click" />
+                            
                      <br/>
                                         <br/>
                 </div>

@@ -118,5 +118,31 @@ namespace WebApplication1
 
 
         }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            if (JournalDrop.SelectedValue == "JournalHome")
+            {
+
+                string keys = Crawler.Keywords(UrlText.Text, KeywordDropdown.SelectedValue.ToString(), KeywordTextbox.Text);
+            
+            }
+            if (JournalDrop.SelectedValue == "JournalHome")
+            {
+
+                string[] links = Crawler.JournalLinks(UrlText.Text, JournalLinksBy.SelectedValue.ToString(), JournalTextbox.Text);
+
+
+                foreach (string uri in links)
+                {
+
+
+                    string keys = Crawler.Keywords(uri, KeywordDropdown.SelectedValue.ToString(), KeywordTextbox.Text);
+                    
+                
+                }
+            
+            }
+        }
     }
 }

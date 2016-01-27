@@ -74,9 +74,7 @@
     <Content Include="font-awesome\css\font-awesome.min.css" />
     <Content Include="font-awesome\fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="img\acm.png" />
     <Content Include="img\background.png" />
-    <Content Include="img\emerald.jpeg" />
     <Content Include="img\portfolio\cabin.png" />
     <Content Include="img\portfolio\cake.png" />
     <Content Include="img\portfolio\circus.png" />
@@ -85,7 +83,6 @@
     <Content Include="img\portfolio\submarine.png" />
     <Content Include="img\profile.png" />
     <Content Include="img\profile1.png" />
-    <Content Include="img\springer.png" />
     <Content Include="js\bootstrap.js" />
     <Content Include="js\bootstrap.min.js" />
     <Content Include="js\cbpAnimatedHeader.js" />
@@ -98,10 +95,13 @@
     <Content Include="Main.aspx" />
     <Content Include="Manage.aspx" />
     <Content Include="Testing form.aspx" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Comparator.cs" />
+    <Compile Include="Crawler.cs" />
     <Compile Include="DataManager.cs" />
     <Compile Include="Journal.cs" />
     <Compile Include="JournalLinks.cs" />

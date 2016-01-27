@@ -40,13 +40,13 @@ namespace WebApplication1 {
         protected global::System.Web.UI.WebControls.TextBox TextBox2;
         
         /// <summary>
-        /// suggest control.
+        /// TextBox3 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label suggest;
+        protected global::System.Web.UI.WebControls.TextBox TextBox3;
         
         /// <summary>
         /// Button1 control.
@@ -67,6 +67,33 @@ namespace WebApplication1 {
         protected global::System.Web.UI.WebControls.Label Label1;
         
         /// <summary>
+        /// Journal1Name control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Journal1Name;
+        
+        /// <summary>
+        /// Journal1Details control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Journal1Details;
+        
+        /// <summary>
+        /// Journal1Submit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Journal1Submit;
+        
+        /// <summary>
         /// Label2 control.
         /// </summary>
         /// <remarks>
@@ -76,6 +103,33 @@ namespace WebApplication1 {
         protected global::System.Web.UI.WebControls.Label Label2;
         
         /// <summary>
+        /// Journal2Name control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Journal2Name;
+        
+        /// <summary>
+        /// Journal2Details control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Journal2Details;
+        
+        /// <summary>
+        /// Journal2Submit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Journal2Submit;
+        
+        /// <summary>
         /// Label6 control.
         /// </summary>
         /// <remarks>
@@ -83,5 +137,32 @@ namespace WebApplication1 {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label6;
+        
+        /// <summary>
+        /// Journal3Name control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Journal3Name;
+        
+        /// <summary>
+        /// Journal3Details control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Journal3Details;
+        
+        /// <summary>
+        /// Journal3Submit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Journal3Submit;
     }
 }

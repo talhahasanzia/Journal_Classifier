@@ -57,7 +57,7 @@
         <br /><br /><br /><br /><br /><br />
          <div style="text-align:center; font-family:Calibri"><h2> New Search</h2></div>
         <div style="text-align:center">
-          <asp:Button ID="Button1"   runat="server" Text="Run Search" />
+          <asp:Button ID="Button1"   runat="server" Text="Run Search" OnClick="Button1_Click" />
          <asp:Button ID="Button2" runat="server"  Text="Update Data" />
        
              <asp:DropDownList  CssClass="with-dropdown" OnSelectedIndexChanged="JournalDrop_SelectedIndexChanged" ID="JournalDrop" runat="server"  AutoPostBack="True">
@@ -69,7 +69,7 @@
 
         </asp:DropDownList>
             <asp:Label  ID="Label1" CssClass="label" Font-Names="Consolas" runat="server" Text="Link: "></asp:Label>
-               <asp:TextBox ID="TextBox1" runat="server" TextMode="Url"></asp:TextBox>
+               <asp:TextBox ID="UrlText" runat="server" TextMode="Url"></asp:TextBox>
                <asp:DropDownList  CssClass="with-dropdown" ID="JournalLinksBy" runat="server" AutoPostBack="True">
 
              <asp:ListItem Selected="True" Value="abc">Search Journal Links by:</asp:ListItem>

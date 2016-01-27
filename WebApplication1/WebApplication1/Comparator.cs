@@ -376,12 +376,13 @@ namespace WebApplication1
                 
                 
                 
-                foreach(string jKeywords in journalKeywords)
+                //
+                foreach (string uKeywords in userKeywords)
                 {
-                    foreach(string uKeywords in userKeywords)
+                    foreach (string jKeywords in journalKeywords)
                     {
 
-                        if (uKeywords.Contains(jKeywords) || jKeywords.Contains(uKeywords))
+                        if (uKeywords.ToLower()==jKeywords.ToLower())
                         {
 
                             count++;
@@ -393,7 +394,7 @@ namespace WebApplication1
 
 
                 }
-                percentageOfMatchedKeywWords = (float)count / totalNumber * 100f;
+                percentageOfMatchedKeywWords = (float)count;
                 
 
 
