@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
+using HtmlAgilityPack;
 
 namespace WebApplication1
 {
@@ -212,6 +213,72 @@ namespace WebApplication1
                 return text;
             }
 
+
+            public static string[] GetSynonyms(string[] words)
+            {
+                List<string> newWords = new List<string>();
+
+                foreach (string word in words)
+                {
+                    int i = 0;
+                    newWords.Add(word);
+                    HtmlDocument doc = new HtmlDocument();
+                    try
+                    {
+                        doc.LoadHtml(new WebClient().DownloadString("http://www.thesaurus.com/browse/" + word.ToLower() + "?s=t"));
+                    }
+                    catch (WebException ec)
+                    {
+
+                        continue;
+                    
+                    }
+                    var rootNode = doc.DocumentNode;
+
+                    var Links = rootNode.Descendants("a");
+
+
+                    foreach (var link in Links)
+                    {
+                        try
+                        {
+
+                            if (link.ChildNodes[1].Name=="span")
+                            {
+                                if (i > 5)
+                                    break;
+                                
+                                if (!(link.ChildNodes[1].InnerText == ""))
+                                {
+
+                                    if (!(link.ChildNodes[1].InnerText==word))
+                                    newWords.Add(link.ChildNodes[1].InnerText);
+                                    i++;
+                                }
+
+                            }
+                        }
+                        catch (Exception ev)
+                        { 
+                        
+                        
+                        
+                        }
+                    
+                    
+                    }
+
+
+                  
+
+                }
+
+
+
+                return newWords.ToArray();
+            }
+
+
             public static List<string> GetSynonyms(List<string> words)
             {
                
@@ -226,6 +293,7 @@ namespace WebApplication1
                 string path = HttpContext.Current.Server.MapPath("~/App_Data/synonyms.txt");
                 Stream writer = new FileStream(path, FileMode.Create);
                 writer.Close();
+                writer.Dispose();
 
                 using (WebClient client = new WebClient())
                 {
@@ -269,7 +337,7 @@ namespace WebApplication1
                                         var f = c.Substring(d, e - d);
                                         // c.
 
-                                        Console.WriteLine(f.Trim('>'));
+                                       
 
                                         synonymsList.Add(f.Trim('>'));
                                         hasDarkYellow = false;
@@ -283,6 +351,7 @@ namespace WebApplication1
 
 
                             }
+                            File.Delete(path);
 
 
 

@@ -77,7 +77,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <img class="img-responsive"  src="img/profile1.png" alt="">
+                    <img class="img-responsive" style="border-radius:25px;" src="img/profile1.png" alt="">
                     <div class="intro-text">
                         <span class="name" id="post">Use Our Stats</span>
                         <hr class="star-light">
@@ -104,7 +104,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-4 col-lg-offset-2 form-group col-xs-12 floating-label-form-group controls">
-                    <asp:TextBox class="form-control" ID="TextBox2" TextMode="MultiLine" runat="server" AutoPostBack="True" OnTextChanged="TextBox2_TextChanged">Keywords</asp:TextBox>
+                    <asp:TextBox class="form-control" ID="TextBox2" TextMode="MultiLine" runat="server" AutoPostBack="True" >Keywords</asp:TextBox>
                 </div>
                 <div class="col-lg-4">
                     <asp:Label ID="suggest" runat="server" Text="Enter keywords that best match your abstract." TextMode="MultiLine" Font-Names="Calibri" Font-Size="Large"></asp:Label>
@@ -127,24 +127,30 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-sm-4 portfolio-item"  style="background-color:blue; text-align:center; font-family:Verdana; margin:10px,10px,10px,10px; padding:5px,5px,5px,5px;" >
+                <div class="col-sm-4 portfolio-item"  style=" border-style:double;  border-width:thick; border-color:aliceblue; border-radius:25px; text-align:center; font-family:Verdana; margin:10px,10px,10px,10px; padding:5px,5px,5px,5px;" >
                    <asp:Label ID="Label1" runat="server"  Text="Springer" Font-Size="Large" ForeColor="White"></asp:Label><br>
-                    <asp:Label ID="SCS" runat="server"  Text="Springer" Font-Size="Medium" ForeColor="White"></asp:Label><br>
-                    <asp:Label ID="SMA" runat="server"  Text="Springer" Font-Size="Medium" ForeColor="White"></asp:Label><br>
-                    <asp:Label ID="SEN" runat="server"  Text="Springer" Font-Size="Medium" ForeColor="White"></asp:Label>
+                    <br/>
+                                        <br/>
+                     <br/>
+                     <br/>
+                                        <br/>
                 </div>
-                
-                <div class="col-sm-4 portfolio-item" style="background-color:blueviolet; text-align:center; font-family:Verdana;  margin:10px,10px,10px,10px; padding:5px,5px,5px,5px;">
-                   <asp:Label ID="Label2" runat="server"  Text="IEEE" Font-Size="Large" ForeColor="White"></asp:Label><br>
-                    <asp:Label ID="Label3" runat="server"  Text="IEEE" Font-Size="Medium" ForeColor="White"></asp:Label><br>
-                    <asp:Label ID="Label4" runat="server"  Text="IEEE" Font-Size="Medium" ForeColor="White"></asp:Label><br>
-                    <asp:Label ID="Label5" runat="server"  Text="IEEE" Font-Size="Medium" ForeColor="White"></asp:Label>
+                <div class="col-sm-4 portfolio-item" style=" border-style:double;  border-width:thick; border-color:aliceblue; border-radius:25px; text-align:center; font-family:Verdana;  margin:10px,10px,10px,10px; padding:5px,5px,5px,5px;">
+                   <asp:Label ID="Label2" runat="server"  Text="ACM" Font-Size="Large" ForeColor="White"></asp:Label><br>
+                   <br/>
+                                        <br/>
+                     <br/>
+                     <br/>
+                                        <br/>
                 </div>
-                <div class="col-sm-4 portfolio-item" style="background-color:darkcyan; text-align:center; font-family:Verdana;  margin:10px,10px,10px,10px; padding:5px,5px,5px,5px;">
+               
+                <div class="col-sm-4 portfolio-item" style="border-style:double;  border-width:thick; border-color:aliceblue; border-radius:25px; text-align:center; font-family:Verdana;  margin:10px,10px,10px,10px; padding:5px,5px,5px,5px;">
                    <asp:Label ID="Label6" runat="server"  Text="ACM" Font-Size="Large" ForeColor="White"></asp:Label><br>
-                    <asp:Label ID="Label7" runat="server"  Text="ACM" Font-Size="Medium" ForeColor="White"></asp:Label><br>
-                    <asp:Label ID="Label8" runat="server"  Text="ACM" Font-Size="Medium" ForeColor="White"></asp:Label><br>
-                    <asp:Label ID="Label9" runat="server"  Text="ACM" Font-Size="Medium" ForeColor="White"></asp:Label>
+                   <br/>
+                                        <br/>
+                     <br/>
+                     <br/>
+                                        <br/>
                 </div>
                
                

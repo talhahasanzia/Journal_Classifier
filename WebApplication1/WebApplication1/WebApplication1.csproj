@@ -62,11 +62,9 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Admin.aspx" />
     <Content Include="App_Data\Emerald Insight Browse Journals and Books.htm" />
     <Content Include="App_Data\KeywordsDB.sdf" />
     <Content Include="App_Data\Links.txt" />
-    <Content Include="App_Data\synonyms.txt" />
     <Content Include="App_Data\Words.txt" />
     <Content Include="css\bootstrap.css" />
     <Content Include="css\bootstrap.min.css" />
@@ -76,6 +74,9 @@
     <Content Include="font-awesome\css\font-awesome.min.css" />
     <Content Include="font-awesome\fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="img\acm.png" />
+    <Content Include="img\background.png" />
+    <Content Include="img\emerald.jpeg" />
     <Content Include="img\portfolio\cabin.png" />
     <Content Include="img\portfolio\cake.png" />
     <Content Include="img\portfolio\circus.png" />
@@ -84,6 +85,7 @@
     <Content Include="img\portfolio\submarine.png" />
     <Content Include="img\profile.png" />
     <Content Include="img\profile1.png" />
+    <Content Include="img\springer.png" />
     <Content Include="js\bootstrap.js" />
     <Content Include="js\bootstrap.min.js" />
     <Content Include="js\cbpAnimatedHeader.js" />
@@ -94,17 +96,11 @@
     <Content Include="js\jqBootstrapValidation.js" />
     <Content Include="js\jquery.js" />
     <Content Include="Main.aspx" />
+    <Content Include="Manage.aspx" />
     <Content Include="Testing form.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Admin.aspx.cs">
-      <DependentUpon>Admin.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Admin.aspx.designer.cs">
-      <DependentUpon>Admin.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Comparator.cs" />
     <Compile Include="DataManager.cs" />
     <Compile Include="Journal.cs" />
@@ -116,6 +112,13 @@
     </Compile>
     <Compile Include="Main.aspx.designer.cs">
       <DependentUpon>Main.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manage.aspx.cs">
+      <DependentUpon>Manage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Manage.aspx.designer.cs">
+      <DependentUpon>Manage.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Testing form.aspx.cs">
