@@ -91,7 +91,7 @@ namespace WebApplication1
 
 
                 }
-                if (j.Website == "ACM")
+                if (j.Website == "ACM" || j.Website=="Other")
                 {
 
 

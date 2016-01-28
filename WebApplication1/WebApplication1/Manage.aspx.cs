@@ -9,10 +9,14 @@ namespace WebApplication1
 {
     public partial class Manage : System.Web.UI.Page
     {
-
+        static Journal tempJournal = new Journal();
         static Journal[] journals; 
         protected void Page_Load(object sender, EventArgs e)
         {
+
+
+            LogLabel.Text = "Links";
+
             journals = DataManager.GetJournalData();
             JournalLinksBy.Visible = false;
             JournalTextbox.Visible = false;
@@ -20,10 +24,17 @@ namespace WebApplication1
             KeywordDropdown.Visible = false;
             KeywordTextbox.Visible = false;
             KeywordValue.Visible = false;
+            HeadingText.Enabled = false;
+            HeadingValue.Enabled = false;
+            SubmitText.Enabled = false;
+            SubmitValue.Enabled = false;
+            Label3.Enabled = false;
+            Label4.Enabled = false;
         }
 
         protected void JournalDrop_SelectedIndexChanged(object sender, EventArgs e)
         {
+            LogLabel.Text = "Links";
             if (JournalDrop.SelectedValue == "JournalLinks")
             {
                 JournalLinksBy.Visible = true;
@@ -32,6 +43,12 @@ namespace WebApplication1
                 KeywordDropdown.Visible = false;
                 KeywordTextbox.Visible = false;
                 KeywordValue.Visible = false;
+                HeadingText.Enabled = false;
+                HeadingValue.Enabled = false;
+                SubmitText.Enabled = false;
+                SubmitValue.Enabled = false;
+                Label3.Enabled = false;
+                Label4.Enabled = false;
             
             
             }
@@ -43,6 +60,12 @@ namespace WebApplication1
                 KeywordDropdown.Visible = true;
                 KeywordTextbox.Visible = true;
                 KeywordValue.Visible = true;
+                HeadingText.Enabled = true;
+                HeadingValue.Enabled = true;
+                SubmitText.Enabled = true;
+                SubmitValue.Enabled = true;
+                Label3.Enabled = true;
+                Label4.Enabled = true;
 
 
             }
@@ -56,20 +79,20 @@ namespace WebApplication1
 
         protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            LogLabel.Text = "Links";
             int id=0;
 
             if (DropDownList1.SelectedValue == "Springer")
             {
-                DropDownList2.Items.Clear();
+                JournalList.Items.Clear();
                 foreach (Journal j in journals)
                 {
 
                     if (j.Website == "Springer")
-                    { 
-                    
-                    
-                    DropDownList2.Items.Add(new ListItem(j.Name,j.Website+id.ToString()));
+                    {
+
+
+                        JournalList.Items.Add(new ListItem(j.Name, j.Link));
                     
                     }
                 
@@ -79,7 +102,7 @@ namespace WebApplication1
             else if (DropDownList1.SelectedValue == "Emerald")
             {
 
-                DropDownList2.Items.Clear();
+                JournalList.Items.Clear();
                 foreach (Journal j in journals)
                 {
 
@@ -87,7 +110,7 @@ namespace WebApplication1
                     {
 
 
-                        DropDownList2.Items.Add(new ListItem(j.Name, j.Website + id.ToString()));
+                        JournalList.Items.Add(new ListItem(j.Name,j.Link));
 
                     }
 
@@ -96,7 +119,7 @@ namespace WebApplication1
             }
             else if (DropDownList1.SelectedValue == "ACM")
             {
-                DropDownList2.Items.Clear();
+                JournalList.Items.Clear();
                 foreach (Journal j in journals)
                 {
 
@@ -104,7 +127,23 @@ namespace WebApplication1
                     {
 
 
-                        DropDownList2.Items.Add(new ListItem(j.Name, j.Website + id.ToString()));
+                        JournalList.Items.Add(new ListItem(j.Name,j.Link));
+
+                    }
+
+                }
+            }
+            else if (DropDownList1.SelectedValue == "Other")
+            {
+                JournalList.Items.Clear();
+                foreach (Journal j in journals)
+                {
+
+                    if (j.Website == "Other")
+                    {
+
+
+                        JournalList.Items.Add(new ListItem(j.Name, j.Link));
 
                     }
 
@@ -113,7 +152,7 @@ namespace WebApplication1
             else
             {
 
-                DropDownList2.Items.Clear();
+                JournalList.Items.Clear();
             }
 
 
@@ -121,26 +160,115 @@ namespace WebApplication1
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-            if (JournalDrop.SelectedValue == "JournalHome")
-            {
 
-                string keys = Crawler.Keywords(UrlText.Text, KeywordDropdown.SelectedValue.ToString(), KeywordTextbox.Text);
+            try
+            {
+                LogLabel.Text = "Links";
+                if (JournalDrop.SelectedValue == "JournalHome")
+                {
+
+                    Journal journal = new Journal();
+
+                    journal.Name = Crawler.Name(UrlText.Text, HeadingValue.SelectedValue, HeadingText.Text);
+                    journal.Link = UrlText.Text;
+                    journal.Keywords = Crawler.Keywords(journal.Link, KeywordDropdown.SelectedValue, KeywordsText.Text);
+                    journal.Website = "Other";
+                    journal.Submit = Crawler.SubmitLink(journal.Link, SubmitValue.SelectedValue, SubmitText.Text);
+
+
+                    HyperLink1.NavigateUrl = journal.Link;
+
+                    Name.Text = journal.Name;
+
+                    Website.Text = journal.Website;
+                    KeywordsText.Text = journal.Keywords;
+                    tempJournal = journal;
+
+                }
+                if (JournalDrop.SelectedValue == "JournalLinks")
+                {
+
+                    string[] links = Crawler.JournalLinks(UrlText.Text, JournalLinksBy.SelectedValue.ToString(), JournalTextbox.Text);
+
+                    foreach (string link in links)
+                    {
+
+
+                        LogLabel.Text += "<br/>" + link;
+
+                    }
+
+
+                }
+            }
+            catch (Exception ec)
+            { 
+            
+            
             
             }
-            if (JournalDrop.SelectedValue == "JournalHome")
+        }
+
+        protected void DropDownList2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+          
+        }
+
+        protected void JournalList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            LogLabel.Text = "Links";
+            string JournalLink = JournalList.SelectedValue;
+            Journal j = new Journal();
+
+            foreach (Journal journal in journals)
             {
 
-                string[] links = Crawler.JournalLinks(UrlText.Text, JournalLinksBy.SelectedValue.ToString(), JournalTextbox.Text);
-
-
-                foreach (string uri in links)
+                if (journal.Link == JournalLink)
                 {
 
 
-                    string keys = Crawler.Keywords(uri, KeywordDropdown.SelectedValue.ToString(), KeywordTextbox.Text);
-                    
+                    j = journal;
+                    break;
+
+                }
+
+
+            }
+
+            HyperLink1.NavigateUrl = j.Link;
+
+            Name.Text = j.Name;
+
+            Website.Text = j.Website;
+            KeywordsText.Text = j.Keywords;
+
+        }
+
+        protected void Button2_Click(object sender, EventArgs e)
+        {
+
+
+            try
+            {
+                Journal[] journal = new Journal[1];
+
+                if (!(tempJournal.Link == ""))
+                {
+                    journal[0] = tempJournal;
+                    DataManager.SetJournalData(journal);
+                    LogLabel.Text = "Data Entered Successfully";
+                }
+                else
+                {
+                    throw new NullReferenceException();
                 
                 }
+
+            }
+            catch (Exception er)
+            {
+
+                LogLabel.Text = "Data Not Entered";
             
             }
         }

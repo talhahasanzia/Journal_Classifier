@@ -9,12 +9,13 @@ namespace WebApplication1
 {
     public class Crawler
     {
+        
 
-
-        public static string[] JournalLinks(string uri, string tagData, string tagDataValue)
+        public static string[] JournalLinks(string uri, string tagAttribute, string tagValue)
         {
             List<string> linkList = new List<string>();
             HtmlDocument doc = new HtmlDocument();
+            
 
             try
             {
@@ -24,21 +25,40 @@ namespace WebApplication1
                 var rootNode = doc.DocumentNode;
 
 
-                var data = rootNode.Descendants().Where(n => n.GetAttributeValue(tagData, "").Equals(tagDataValue));
 
+                if (tagAttribute == "Tag")
+                {
+
+                    var data = rootNode.Descendants(tagValue);
+                    foreach (var dataNode in data)
+                    {
+
+
+                        string dataString = dataNode.InnerText;
+                        dataString += " " + dataNode.InnerHtml;
+                        linkList.Add(dataString);
+
+                    }
+                   
+                }
+                else
+                {
+                    var data = rootNode.Descendants().Where(n => n.GetAttributeValue(tagAttribute, "").Equals(tagValue));
+                    foreach (var dataNode in data)
+                    {
+
+
+                        string dataString = dataNode.InnerText;
+                        dataString += " " + dataNode.InnerHtml;
+                        linkList.Add(dataString);
+
+                    } 
+                }
 
                
 
 
-                foreach (var dataNode in data)
-                {
-
-
-                    string dataString = dataNode.InnerText;
-                    dataString += " " + dataNode.InnerHtml;
-                    linkList.Add(dataString);
-
-                }
+               
 
             }
             catch (Exception ex)
@@ -53,7 +73,7 @@ namespace WebApplication1
         
         }
 
-        public static string Keywords(string uri, string tagData, string tagDataValue)
+        public static string Keywords(string uri, string tagAttribute, string tagValue)
         {
 
 
@@ -70,22 +90,40 @@ namespace WebApplication1
 
                 var rootNode = doc.DocumentNode;
 
+                if (tagAttribute == "Tag")
+                {
 
-                var data = rootNode.Descendants().Where(n => n.GetAttributeValue(tagData, "").Equals(tagDataValue));
+                    var data = rootNode.Descendants(tagValue);
+                    foreach (var dataNode in data)
+                    {
 
 
+                        string dataString = dataNode.InnerText;
+                        dataString += " " + dataNode.InnerHtml;
+                        keywordsList.Add(dataString);
 
-
-
-                foreach (var dataNode in data)
+                    }
+                }
+                else
                 {
 
 
-                    string dataString = dataNode.InnerText;
-                    dataString += " " + dataNode.InnerHtml;
-                    keywordsList.Add(dataString);
+                    var data = rootNode.Descendants().Where(n => n.GetAttributeValue(tagAttribute, "").Equals(tagValue));
+                    foreach (var dataNode in data)
+                    {
 
+
+                        string dataString = dataNode.InnerText;
+                        dataString += " " + dataNode.InnerHtml;
+                        keywordsList.Add(dataString);
+
+                    }
+                
                 }
+
+
+
+                
 
             }
             catch (Exception ex)
@@ -106,6 +144,153 @@ namespace WebApplication1
         
         
         
+        }
+        public static string Name(string uri, string tagAttribute, string tagValue)
+        {
+
+
+
+            string Name = "";
+
+           
+            HtmlDocument doc = new HtmlDocument();
+
+            try
+            {
+                doc.LoadHtml(new WebClient().DownloadString(uri));
+
+
+                var rootNode = doc.DocumentNode;
+
+                if (tagAttribute == "Tag")
+                {
+                    var data = rootNode.Descendants(tagValue);
+
+
+
+
+
+                    foreach (var dataNode in data)
+                    {
+
+
+
+                        Name = dataNode.InnerText;
+                        break;
+
+                    }
+                }
+                else {
+
+                    var data = rootNode.Descendants().Where(n => n.GetAttributeValue(tagAttribute, "").Equals(tagValue));
+
+
+
+
+
+                    foreach (var dataNode in data)
+                    {
+
+
+
+                        Name = dataNode.InnerText;
+                        break;
+
+                    }
+                
+                }
+                
+            }
+            catch (Exception ex)
+            {
+
+
+
+            }
+            
+
+
+
+
+
+
+            return Name;
+
+
+
+
+        }
+
+        public static string SubmitLink(string uri, string tagAttribute, string tagValue)
+        {
+
+
+
+            string SubmitLink = "";
+
+           
+            HtmlDocument doc = new HtmlDocument();
+
+            try
+            {
+                doc.LoadHtml(new WebClient().DownloadString(uri));
+
+
+                var rootNode = doc.DocumentNode;
+
+                if (tagAttribute == "Tag")
+                {
+                    var data = rootNode.Descendants(tagValue);
+
+
+
+
+
+                    foreach (var dataNode in data)
+                    {
+
+                        SubmitLink = dataNode.Attributes["href"].Value;
+
+
+                    }
+                }
+                else
+                {
+
+                    var data = rootNode.Descendants().Where(n => n.GetAttributeValue(tagAttribute, "").Equals(tagValue));
+
+
+
+
+
+                    foreach (var dataNode in data)
+                    {
+
+                        SubmitLink = dataNode.Attributes["href"].Value;
+
+
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+
+
+            }
+           
+
+
+
+
+
+
+            return SubmitLink;
+
+
+
+
         }
 
 
