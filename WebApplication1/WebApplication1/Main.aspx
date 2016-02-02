@@ -106,10 +106,7 @@
                 <div class="col-lg-4 col-lg-offset-2 form-group col-xs-12 floating-label-form-group controls">
                     <asp:TextBox class="form-control" ID="TextBox2" TextMode="MultiLine" runat="server"  >Keywords</asp:TextBox>
                 </div>
-                <div class="col-lg-4">
-                    <span class="skills">Suggested Keywords</span>
-                   <asp:TextBox class="form-control" ID="TextBox3" TextMode="MultiLine" runat="server"  ></asp:TextBox>
-                </div>
+         
                 
             </div>
              

@@ -13,11 +13,12 @@ namespace WebApplication1
         static Journal[] journals; 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            journals = DataManager.GetJournalData();
+            
 
             LogLabel.Text = "Links";
 
-            journals = DataManager.GetJournalData();
+            
             JournalLinksBy.Visible = false;
             JournalTextbox.Visible = false;
             JournalValue.Visible = false;

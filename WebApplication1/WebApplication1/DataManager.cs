@@ -10,10 +10,7 @@ namespace WebApplication1
 {
     public class DataManager
     {
-        static DataSet SQLdset;
-        static SqlCeDataAdapter SQLAdp;
-     
-        static SqlCeConnection SQLCon;
+       
             
             public DataManager()
         {
@@ -28,95 +25,345 @@ namespace WebApplication1
 
 
 
-            public static Journal[] GetJournalData()
+            public static Journal[] GetSpringerData()
             {
+
+                 DataSet SQLdset;
+                 SqlCeDataAdapter SQLAdp;
+     
+                SqlCeConnection SQLCon;
+
                 Journal[] journalData = new Journal[1]; // sample declaration to prevent compile time error
 
-                SQLCon = new SqlCeConnection();
-
-                string tableName = "Journal_Data";
-                string ConString = @"Data Source=|DataDirectory|KeywordsDB.sdf;";
-
-                 SQLCon.ConnectionString = ConString;
-
-                 SQLdset = new DataSet();
-                 SQLAdp = new SqlCeDataAdapter();
-                
-                SQLCon.Open();
-
-                string Comm = "SELECT DISTINCT JournalName FROM Journal_Data";
-
-                SqlCeCommand command = new SqlCeCommand(Comm);
-                command.Connection = SQLCon;
-                SQLAdp.SelectCommand = command;
-                
-                SQLAdp.Fill(SQLdset,tableName);
-                
-
-                SQLCon.Close();
-
-
-                if (SQLdset != null)
+                try
                 {
-                    ;
-                    int j = SQLdset.Tables[tableName].Rows.Count;
-                   
+                    SQLCon = new SqlCeConnection();
 
-                 journalData = new Journal[j];
-                    ;
+                    string tableName = "Journal_Data";
+                    string ConString = @"Data Source=|DataDirectory|KeywordsDB.sdf;";
 
-                    for (int i = 0; i < j ; i++)
+                    SQLCon.ConnectionString = ConString;
+
+                    SQLdset = new DataSet();
+                    SQLAdp = new SqlCeDataAdapter();
+
+                    SQLCon.Open();
+
+                    string Comm = "SELECT DISTINCT JournalName FROM Journal_Data WHERE JournalName='Springer'";
+
+                    SqlCeCommand command = new SqlCeCommand(Comm);
+                    command.Connection = SQLCon;
+                    SQLAdp.SelectCommand = command;
+
+                    SQLAdp.Fill(SQLdset, tableName);
+
+
+                    SQLCon.Close();
+
+
+                    if (SQLdset != null)
                     {
-                        DataSet SQLdset2=new DataSet();
-                        SQLCon.Open();
+                        ;
+                        int j = SQLdset.Tables[tableName].Rows.Count;
 
-                        Comm = "SELECT * FROM Journal_Data Where JournalName='" + SQLdset.Tables[tableName].Rows[i]["JournalName"].ToString() + "';"; ;
 
-                        SqlCeDataAdapter SQLAdp2 = new SqlCeDataAdapter(); ;
-                        SqlCeCommand command2 = new SqlCeCommand(Comm);
-                        command2.Connection = SQLCon;
-                        SQLAdp2.SelectCommand = command2;
-                
+                        journalData = new Journal[j];
+                        ;
 
-                        SQLAdp2.Fill(SQLdset2, tableName);
+                        for (int i = 0; i < j; i++)
+                        {
+                            DataSet SQLdset2 = new DataSet();
+                            SQLCon.Open();
 
-                        SQLCon.Close();
+                            Comm = "SELECT * FROM Journal_Data Where JournalName='" + SQLdset.Tables[tableName].Rows[i]["JournalName"].ToString() + "';"; ;
 
-                        journalData[i] = new Journal();
+                            SqlCeDataAdapter SQLAdp2 = new SqlCeDataAdapter(); ;
+                            SqlCeCommand command2 = new SqlCeCommand(Comm);
+                            command2.Connection = SQLCon;
+                            SQLAdp2.SelectCommand = command2;
 
-                        journalData[i].Name = SQLdset2.Tables[tableName].Rows[0]["JournalName"].ToString();
-                        journalData[i].Link = SQLdset2.Tables[tableName].Rows[0]["JournalLink"].ToString();
-                        journalData[i].Website = SQLdset2.Tables[tableName].Rows[0]["Website"].ToString();
-                        journalData[i].Keywords = SQLdset2.Tables[tableName].Rows[0]["Keywords"].ToString();
-                        journalData[i].Submit = SQLdset2.Tables[tableName].Rows[0]["SubmitLink"].ToString();
-                       
-                        
+
+                            SQLAdp2.Fill(SQLdset2, tableName);
+
+                            SQLCon.Close();
+
+                            journalData[i] = new Journal();
+
+                            journalData[i].Name = SQLdset2.Tables[tableName].Rows[0]["JournalName"].ToString();
+                            journalData[i].Link = SQLdset2.Tables[tableName].Rows[0]["JournalLink"].ToString();
+                            journalData[i].Website = SQLdset2.Tables[tableName].Rows[0]["Website"].ToString();
+                            journalData[i].Keywords = SQLdset2.Tables[tableName].Rows[0]["Keywords"].ToString();
+                            journalData[i].Submit = SQLdset2.Tables[tableName].Rows[0]["SubmitLink"].ToString();
+
+
+                        }
                     }
                 }
+                catch (Exception ec)
+                { }
+                return journalData;
+
+            }
+
+            public static Journal[] GetEmeraldData()
+            {
+
+                DataSet SQLdset;
+                SqlCeDataAdapter SQLAdp;
+
+                SqlCeConnection SQLCon;
+                Journal[] journalData = new Journal[1]; // sample declaration to prevent compile time error
+                try
+                {
+                    SQLCon = new SqlCeConnection();
+
+                    string tableName = "Journal_Data";
+                    string ConString = @"Data Source=|DataDirectory|KeywordsDB.sdf;";
+
+                    SQLCon.ConnectionString = ConString;
+
+                    SQLdset = new DataSet();
+                    SQLAdp = new SqlCeDataAdapter();
+
+                    SQLCon.Open();
+
+                    string Comm = "SELECT DISTINCT JournalName FROM Journal_Data WHERE JournalName='Emerald'";
+
+                    SqlCeCommand command = new SqlCeCommand(Comm);
+                    command.Connection = SQLCon;
+                    SQLAdp.SelectCommand = command;
+
+                    SQLAdp.Fill(SQLdset, tableName);
+
+
+                    SQLCon.Close();
+
+
+                    if (SQLdset != null)
+                    {
+                        ;
+                        int j = SQLdset.Tables[tableName].Rows.Count;
+
+
+                        journalData = new Journal[j];
+                        ;
+
+                        for (int i = 0; i < j; i++)
+                        {
+                            DataSet SQLdset2 = new DataSet();
+                            SQLCon.Open();
+
+                            Comm = "SELECT * FROM Journal_Data Where JournalName='" + SQLdset.Tables[tableName].Rows[i]["JournalName"].ToString() + "';"; ;
+
+                            SqlCeDataAdapter SQLAdp2 = new SqlCeDataAdapter(); ;
+                            SqlCeCommand command2 = new SqlCeCommand(Comm);
+                            command2.Connection = SQLCon;
+                            SQLAdp2.SelectCommand = command2;
+
+
+                            SQLAdp2.Fill(SQLdset2, tableName);
+
+                            SQLCon.Close();
+
+                            journalData[i] = new Journal();
+
+                            journalData[i].Name = SQLdset2.Tables[tableName].Rows[0]["JournalName"].ToString();
+                            journalData[i].Link = SQLdset2.Tables[tableName].Rows[0]["JournalLink"].ToString();
+                            journalData[i].Website = SQLdset2.Tables[tableName].Rows[0]["Website"].ToString();
+                            journalData[i].Keywords = SQLdset2.Tables[tableName].Rows[0]["Keywords"].ToString();
+                            journalData[i].Submit = SQLdset2.Tables[tableName].Rows[0]["SubmitLink"].ToString();
+
+
+                        }
+                    }
+                }
+                catch (Exception ed)
+                { }
+                return journalData;
+
+            }
+            public static Journal[] GetACMData()
+            {
+
+
+                DataSet SQLdset;
+                SqlCeDataAdapter SQLAdp;
+
+                SqlCeConnection SQLCon;
+                Journal[] journalData = new Journal[1]; // sample declaration to prevent compile time error
+                try
+                {
+                    SQLCon = new SqlCeConnection();
+
+                    string tableName = "Journal_Data";
+                    string ConString = @"Data Source=|DataDirectory|KeywordsDB.sdf;";
+
+                    SQLCon.ConnectionString = ConString;
+
+                    SQLdset = new DataSet();
+                    SQLAdp = new SqlCeDataAdapter();
+
+                    SQLCon.Open();
+
+                    string Comm = "SELECT DISTINCT JournalName FROM Journal_Data WHERE JournalName='ACM' OR 'Other'";
+
+                    SqlCeCommand command = new SqlCeCommand(Comm);
+                    command.Connection = SQLCon;
+                    SQLAdp.SelectCommand = command;
+
+                    SQLAdp.Fill(SQLdset, tableName);
+
+
+                    SQLCon.Close();
+
+
+                    if (SQLdset != null)
+                    {
+                        ;
+                        int j = SQLdset.Tables[tableName].Rows.Count;
+
+
+                        journalData = new Journal[j];
+                        ;
+
+                        for (int i = 0; i < j; i++)
+                        {
+                            DataSet SQLdset2 = new DataSet();
+                            SQLCon.Open();
+
+                            Comm = "SELECT * FROM Journal_Data Where JournalName='" + SQLdset.Tables[tableName].Rows[i]["JournalName"].ToString() + "';"; ;
+
+                            SqlCeDataAdapter SQLAdp2 = new SqlCeDataAdapter(); ;
+                            SqlCeCommand command2 = new SqlCeCommand(Comm);
+                            command2.Connection = SQLCon;
+                            SQLAdp2.SelectCommand = command2;
+
+
+                            SQLAdp2.Fill(SQLdset2, tableName);
+
+                            SQLCon.Close();
+
+                            journalData[i] = new Journal();
+
+                            journalData[i].Name = SQLdset2.Tables[tableName].Rows[0]["JournalName"].ToString();
+                            journalData[i].Link = SQLdset2.Tables[tableName].Rows[0]["JournalLink"].ToString();
+                            journalData[i].Website = SQLdset2.Tables[tableName].Rows[0]["Website"].ToString();
+                            journalData[i].Keywords = SQLdset2.Tables[tableName].Rows[0]["Keywords"].ToString();
+                            journalData[i].Submit = SQLdset2.Tables[tableName].Rows[0]["SubmitLink"].ToString();
+
+
+                        }
+                    }
+                }
+                catch (Exception ef)
+                { }
                 return journalData;
 
             }
 
 
+            public static Journal[] GetJournalData()
+            {
+
+
+                DataSet SQLdset;
+                SqlCeDataAdapter SQLAdp;
+
+                SqlCeConnection SQLCon;
+                Journal[] journalData = new Journal[1]; // sample declaration to prevent compile time error
+                try
+                {
+                    SQLCon = new SqlCeConnection();
+
+                    string tableName = "Journal_Data";
+                    string ConString = @"Data Source=|DataDirectory|KeywordsDB.sdf;";
+
+                    SQLCon.ConnectionString = ConString;
+
+                    SQLdset = new DataSet();
+                    SQLAdp = new SqlCeDataAdapter();
+
+                    SQLCon.Open();
+
+                    string Comm = "SELECT DISTINCT JournalName FROM Journal_Data";
+
+                    SqlCeCommand command = new SqlCeCommand(Comm);
+                    command.Connection = SQLCon;
+                    SQLAdp.SelectCommand = command;
+
+                    SQLAdp.Fill(SQLdset, tableName);
+
+
+                    SQLCon.Close();
+
+
+                    if (SQLdset != null)
+                    {
+                        ;
+                        int j = SQLdset.Tables[tableName].Rows.Count;
+
+
+                        journalData = new Journal[j];
+                        ;
+
+                        for (int i = 0; i < j; i++)
+                        {
+                            DataSet SQLdset2 = new DataSet();
+                            SQLCon.Open();
+
+                            Comm = "SELECT * FROM Journal_Data Where JournalName='" + SQLdset.Tables[tableName].Rows[i]["JournalName"].ToString() + "';"; ;
+
+                            SqlCeDataAdapter SQLAdp2 = new SqlCeDataAdapter(); ;
+                            SqlCeCommand command2 = new SqlCeCommand(Comm);
+                            command2.Connection = SQLCon;
+                            SQLAdp2.SelectCommand = command2;
+
+
+                            SQLAdp2.Fill(SQLdset2, tableName);
+
+                            SQLCon.Close();
+
+                            journalData[i] = new Journal();
+
+                            journalData[i].Name = SQLdset2.Tables[tableName].Rows[0]["JournalName"].ToString();
+                            journalData[i].Link = SQLdset2.Tables[tableName].Rows[0]["JournalLink"].ToString();
+                            journalData[i].Website = SQLdset2.Tables[tableName].Rows[0]["Website"].ToString();
+                            journalData[i].Keywords = SQLdset2.Tables[tableName].Rows[0]["Keywords"].ToString();
+                            journalData[i].Submit = SQLdset2.Tables[tableName].Rows[0]["SubmitLink"].ToString();
+
+
+                        }
+                    }
+                }
+                catch (Exception ef)
+                { }
+                return journalData;
+
+            }
 
             public static void SetJournalData(Journal[] journalDataList)
             {
+                DataSet SQLdset;
+                SqlCeDataAdapter SQLAdp;
+
+                SqlCeConnection SQLCon;
                 string tableName = "Journal_Data";
-                
+
                 SQLCon = new SqlCeConnection();
 
                 string ConString = @"Data Source=|DataDirectory|KeywordsDB.sdf;";
-                
+
                 SQLCon.ConnectionString = ConString;
 
 
 
-
-                if (SQLCon != null)
+                try
                 {
-                    SQLCon.Open();
+                    if (SQLCon != null)
+                    {
+                        SQLCon.Open();
 
-                   
+
                         string sql;
 
 
@@ -129,14 +376,14 @@ namespace WebApplication1
                         int count = journalDataList.Length;
 
 
-                        for (int i = 0; i < count; i++ )
+                        for (int i = 0; i < count; i++)
                         {
-                            
 
-                           
-                                sql = "INSERT INTO Journal_Data(JournalName, JournalLink, Keywords, Website, SubmitLink) VALUES('" + journalDataList[i].Name + "','" + journalDataList[i].Link + "','" + journalDataList[i].Keywords.ToLower() + "','" + journalDataList[i].Website + "','" + journalDataList[i].Submit + "');";
 
-                           
+
+                            sql = "INSERT INTO Journal_Data(JournalName, JournalLink, Keywords, Website, SubmitLink) VALUES('" + journalDataList[i].Name + "','" + journalDataList[i].Link + "','" + journalDataList[i].Keywords.ToLower() + "','" + journalDataList[i].Website + "','" + journalDataList[i].Submit + "');";
+
+
 
                             comm.CommandText = sql;
 
@@ -159,18 +406,24 @@ namespace WebApplication1
                             }
                         }
                         SQLCon.Close();
-                    
-                }
-               
 
-                
-            
+                    }
+                }
+                catch (Exception ec)
+                { }
+
+
+
+
             }
 
 
             public static bool UpdateKeywords(string JournalName, string NewKeywords)
             {
+                DataSet SQLdset;
+                SqlCeDataAdapter SQLAdp;
 
+                SqlCeConnection SQLCon;
                 bool Done = true;
 
                 string tableName = "Journal_Data";
@@ -183,25 +436,26 @@ namespace WebApplication1
 
 
 
-
-                if (SQLCon != null)
+                try
                 {
-                    SQLCon.Open();
+                    if (SQLCon != null)
+                    {
+                        SQLCon.Open();
 
 
-                    string sql;
+                        string sql;
 
 
-                    SqlCeCommand comm = new SqlCeCommand();
+                        SqlCeCommand comm = new SqlCeCommand();
 
-                    comm.CommandType = CommandType.Text;
-                    comm.Connection = SQLCon;
-
-
-                  
+                        comm.CommandType = CommandType.Text;
+                        comm.Connection = SQLCon;
 
 
-                        sql = "Update "+tableName+" Set Keywords='"+NewKeywords+"' WHERE JournalName='"+JournalName+"';";
+
+
+
+                        sql = "Update " + tableName + " Set Keywords='" + NewKeywords + "' WHERE JournalName='" + JournalName + "';";
 
 
 
@@ -225,59 +479,20 @@ namespace WebApplication1
 
 
                         }
-                    
-                    SQLCon.Close();
 
+                        SQLCon.Close();
+
+                    }
+                }
+                catch (Exception er)
+                {
+
+                    Done = false;
                 }
 
                 return Done;
             }
 
-            static bool DeleteOnUpdate(string tableName)
-            {
-
-                 SQLCon = new SqlCeConnection();
-
-                string ConString = @"Data Source=|DataDirectory|KeywordsDB.sdf;";
-                
-                SQLCon.ConnectionString = ConString;
-
-                bool status = false;
-
-
-                if (SQLCon != null)
-                {
-                    SQLCon.Open();
-                    string sql;
-
-                     sql = "DELETE " + tableName;
-
-                    SqlCeCommand comm = new SqlCeCommand();
-                    comm.CommandText = sql;
-                    comm.CommandType = CommandType.Text;
-                    comm.Connection = SQLCon;
-
-
-                    try
-                    {
-
-
-
-                        comm.ExecuteNonQuery();
-                        status = true;
-                       
-
-                    }
-                    catch (Exception ex)
-                    {
-                        System.Diagnostics.Debug.WriteLine(ex.Message);
-                        status = false;
-                       
-                    }
-                }
-                return status;
-
-               
-            }
+          
     }
 }
