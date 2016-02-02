@@ -164,48 +164,57 @@ namespace WebApplication1
             try
             {
                 LogLabel.Text = "Links";
-                if (JournalDrop.SelectedValue == "JournalHome")
+                if (JournalDrop.SelectedValue == "abc" || JournalLinksBy.SelectedValue == "abc" || HeadingValue.SelectedValue == "abc" || KeywordDropdown.SelectedValue == "abc" || SubmitValue.SelectedValue == "abc"
+                    || String.IsNullOrEmpty(UrlText.Text) || String.IsNullOrEmpty(KeywordsText.Text) || String.IsNullOrEmpty(SubmitText.Text) || String.IsNullOrEmpty(JournalTextbox.Text)
+                    )
                 {
-
-                    Journal journal = new Journal();
-
-                    journal.Name = Crawler.Name(UrlText.Text, HeadingValue.SelectedValue, HeadingText.Text);
-                    journal.Link = UrlText.Text;
-                    journal.Keywords = Crawler.Keywords(journal.Link, KeywordDropdown.SelectedValue, KeywordsText.Text);
-                    journal.Website = "Other";
-                    journal.Submit = Crawler.SubmitLink(journal.Link, SubmitValue.SelectedValue, SubmitText.Text);
-
-
-                    HyperLink1.NavigateUrl = journal.Link;
-
-                    Name.Text = journal.Name;
-
-                    Website.Text = journal.Website;
-                    KeywordsText.Text = journal.Keywords;
-                    tempJournal = journal;
-
+                    LogLabel.Text = "   Data Missing, please make sure values are set correctly.";
                 }
-                if (JournalDrop.SelectedValue == "JournalLinks")
+                else
                 {
-
-                    string[] links = Crawler.JournalLinks(UrlText.Text, JournalLinksBy.SelectedValue.ToString(), JournalTextbox.Text);
-
-                    foreach (string link in links)
+                    if (JournalDrop.SelectedValue == "JournalHome")
                     {
 
+                        Journal journal = new Journal();
 
-                        LogLabel.Text += "<br/>" + link;
+                        journal.Name = Crawler.Name(UrlText.Text, HeadingValue.SelectedValue, HeadingText.Text);
+                        journal.Link = UrlText.Text;
+                        journal.Keywords = Crawler.Keywords(journal.Link, KeywordDropdown.SelectedValue, KeywordsText.Text);
+                        journal.Website = "Other";
+                        journal.Submit = Crawler.SubmitLink(journal.Link, SubmitValue.SelectedValue, SubmitText.Text);
+
+
+                        HyperLink1.NavigateUrl = journal.Link;
+
+                        Name.Text = journal.Name;
+
+                        Website.Text = journal.Website;
+                        KeywordsText.Text = journal.Keywords;
+                        tempJournal = journal;
 
                     }
+                    if (JournalDrop.SelectedValue == "JournalLinks")
+                    {
+
+                        string[] links = Crawler.JournalLinks(UrlText.Text, JournalLinksBy.SelectedValue.ToString(), JournalTextbox.Text);
+
+                        foreach (string link in links)
+                        {
 
 
+                            LogLabel.Text += "<br/>" + link;
+
+                        }
+
+
+                    }
                 }
             }
             catch (Exception ec)
-            { 
-            
-            
-            
+            {
+
+
+
             }
         }
 
@@ -234,7 +243,7 @@ namespace WebApplication1
 
 
             }
-
+            tempJournal = j;
             HyperLink1.NavigateUrl = j.Link;
 
             Name.Text = j.Name;
@@ -271,6 +280,24 @@ namespace WebApplication1
                 LogLabel.Text = "Data Not Entered";
             
             }
+        }
+
+        protected void Update_Click(object sender, EventArgs e)
+        {
+            string newKeywords = KeywordsText.Text;
+
+
+            if (DataManager.UpdateKeywords(tempJournal.Name, newKeywords))
+            {
+
+                LogLabel.Text = "Updated keywords successfully.";
+            }
+            else
+            {
+                LogLabel.Text = "An error occured.";
+            
+            }
+
         }
     }
 }

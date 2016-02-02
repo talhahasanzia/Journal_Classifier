@@ -168,6 +168,71 @@ namespace WebApplication1
             }
 
 
+            public static bool UpdateKeywords(string JournalName, string NewKeywords)
+            {
+
+                bool Done = true;
+
+                string tableName = "Journal_Data";
+
+                SQLCon = new SqlCeConnection();
+
+                string ConString = @"Data Source=|DataDirectory|KeywordsDB.sdf;";
+
+                SQLCon.ConnectionString = ConString;
+
+
+
+
+                if (SQLCon != null)
+                {
+                    SQLCon.Open();
+
+
+                    string sql;
+
+
+                    SqlCeCommand comm = new SqlCeCommand();
+
+                    comm.CommandType = CommandType.Text;
+                    comm.Connection = SQLCon;
+
+
+                  
+
+
+                        sql = "Update "+tableName+" Set Keywords='"+NewKeywords+"' WHERE JournalName='"+JournalName+"';";
+
+
+
+                        comm.CommandText = sql;
+
+                        try
+                        {
+
+
+
+                            comm.ExecuteNonQuery();
+
+                        }
+                        catch (Exception ex)
+                        {
+                            System.Diagnostics.Debug.WriteLine(ex.Message);
+                            Done = false;
+                        }
+                        finally
+                        {
+
+
+                        }
+                    
+                    SQLCon.Close();
+
+                }
+
+                return Done;
+            }
+
             static bool DeleteOnUpdate(string tableName)
             {
 

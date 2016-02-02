@@ -40,7 +40,7 @@ namespace WebApplication1
             int i = 0;
             string keywords = TextBox2.Text;
 
-            keywords = Comparator.ProcessWords(keywords);
+           
             string[] stringSeparators = new string[] { "," };
 
 
@@ -53,7 +53,7 @@ namespace WebApplication1
             string[] splitter = { ",", " " };
 
             string[] keys = keywords.Split(stringSeparators, StringSplitOptions.RemoveEmptyEntries);
-            string[] keySyn = Comparator.GetSynonyms(keys);
+            string[] keySyn = (keys);
             var list = new List<string>();
             list.AddRange(keys);
             list.AddRange(keySyn);
@@ -68,7 +68,7 @@ namespace WebApplication1
                 i++;
 
 
-                string journalKeywordString = Comparator.ProcessWords(j.Keywords);
+                string journalKeywordString = (j.Keywords);
                  journalKeywords=journalKeywordString.Split(splitter,StringSplitOptions.RemoveEmptyEntries);
 
 
@@ -161,7 +161,7 @@ namespace WebApplication1
         protected void TextBox1_TextChanged(object sender, EventArgs e)
         {
 
-            string suggestedWords = Comparator.ProcessWords(TextBox1.Text);
+            string suggestedWords = (TextBox1.Text);
             TextBox3.Text =  suggestedWords;
 
 

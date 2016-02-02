@@ -198,7 +198,7 @@ namespace WebApplication1
            
            }
            /////////////////////////////////////////////// end keywords ///////////////////////////////////////
-           Keywords = Comparator.ProcessWords(Keywords);
+           Keywords = (Keywords);
            journalObj.Keywords = Keywords;
            journalObj.Website = "Springer";
 
@@ -284,8 +284,19 @@ namespace WebApplication1
 
        //    return journal;
        //}
+
+
+        //public static Journal ACM(string url)
+        //{
+
+
+
+        //    Journal journal = new Journal();
+
+      
+
+        //    return journal;
+        //}
        
-
-
     }
 }

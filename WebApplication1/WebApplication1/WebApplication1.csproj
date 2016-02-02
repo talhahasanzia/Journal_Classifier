@@ -62,7 +62,6 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\Emerald Insight Browse Journals and Books.htm" />
     <Content Include="App_Data\KeywordsDB.sdf" />
     <Content Include="App_Data\Links.txt" />
     <Content Include="App_Data\Words.txt" />
