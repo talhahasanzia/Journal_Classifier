@@ -37,6 +37,5 @@ E:\Github\Journal_Classifier\WebApplication1\WebApplication1\bin\WebApplication1
 E:\Github\Journal_Classifier\WebApplication1\WebApplication1\bin\HtmlAgilityPack.dll
 E:\Github\Journal_Classifier\WebApplication1\WebApplication1\bin\HtmlAgilityPack.pdb
 E:\Github\Journal_Classifier\WebApplication1\WebApplication1\bin\HtmlAgilityPack.xml
-E:\Github\Journal_Classifier\WebApplication1\WebApplication1\obj\Debug\WebApplication1.csprojResolveAssemblyReference.cache
 E:\Github\Journal_Classifier\WebApplication1\WebApplication1\obj\Debug\WebApplication1.dll
 E:\Github\Journal_Classifier\WebApplication1\WebApplication1\obj\Debug\WebApplication1.pdb

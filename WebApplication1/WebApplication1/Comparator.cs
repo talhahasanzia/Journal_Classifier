@@ -11,7 +11,7 @@ namespace WebApplication1
     public class Comparator
     {
 
-        static List<string> words = new List<string>();
+        public static List<string> words = new List<string>();
         
 
 
@@ -25,7 +25,57 @@ namespace WebApplication1
         
         }
 
+           public static void SetWords()
+            {
+                words= new List<string>();
 
+            string[] splitter = { ",","\n","\r" };
+           
+            int i = 0;
+            string[] kwords = new string[140];
+
+            Journal[] j=DataManager.GetJournalData();
+
+            foreach(Journal journal in j)
+            {
+                
+                kwords[i] = journal.Keywords;
+                i++;
+            
+            }
+           
+
+                foreach(string tword in kwords)
+                {
+                    string[] tempKeywords = tword.Split(splitter, StringSplitOptions.RemoveEmptyEntries);
+
+                    foreach (string keyword in tempKeywords)
+                    {
+                        string temp = keyword;
+                        temp = temp.TrimEnd();
+                        temp = temp.TrimStart();
+                        temp = temp.Replace("(", " ");
+                        temp = temp.Replace(")", " ");
+                        temp = temp.Replace("'", "");
+                        temp = temp.Replace("\n", "");
+                        temp = temp.Replace("\r", "");
+                        temp = temp.Replace("\\", "");
+                        temp = temp.Replace("/", ",");
+                        temp = temp.Replace(" ", "-");
+                        temp = temp.ToLower();
+
+                        if (words.Contains(temp))
+                        { }
+                        else
+                        {
+                           
+                            words.Add(temp);
+                        }
+                    }
+                }
+
+               
+            }
            
 
 
@@ -41,6 +91,9 @@ namespace WebApplication1
                     int i=0;
                     string[] splitter = { ".", " ", ":", ",", ";", "'", "\"", "(", ")" };
                     string[] UserWords = SampleKeywordsText.Split(splitter, StringSplitOptions.RemoveEmptyEntries);
+
+
+                    SetWords();
 
                     foreach (string uWord in UserWords)
                     {

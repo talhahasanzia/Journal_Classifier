@@ -132,16 +132,13 @@ namespace WebApplication1
             string[] stringSeparators = new string[] { "," };
 
 
-            string[] s = Comparator.PrepareUserKeywords(keywords);
+            string[] s = keywords.Split(stringSeparators,StringSplitOptions.RemoveEmptyEntries);
 
 
 
-            Parallel.Invoke(
-      () => MatchACMandOther(s),
-      () => MatchEmerald(s),
-      () => MatchSpringer(s));
-
-           
+            MatchACMandOther(s);
+            MatchEmerald(s);
+            MatchSpringer(s);
 
            
         }

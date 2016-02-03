@@ -25,9 +25,10 @@ namespace WebApplication1
 
         protected void Button1_Click(object sender, EventArgs e)
         {
-           
-        }
+            string[] keys = Comparator.PrepareUserKeywords("this includes information systems");
 
+            Label1.Text = keys[0];
+        }
        
     }
 }
