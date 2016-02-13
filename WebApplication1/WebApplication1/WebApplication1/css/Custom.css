@@ -1,0 +1,33 @@
+﻿body {
+}
+
+.margin-setting {
+
+margin-left:10px;
+margin-bottom:40px;
+margin-top:40px;
+padding-bottom:10px;
+padding-top:10px;
+}
+
+.with-dropdown {
+
+    margin-top:10px;
+
+}
+
+.label {
+
+padding-bottom:20px;
+
+}
+.button-left {
+margin-right:20px;
+
+}
+
+.corner-radius-button {
+border-radius:25px;
+margin-right:20px;
+
+}
