@@ -97,6 +97,8 @@ namespace WebApplication1
 
                     foreach (string uWord in UserWords)
                     {
+                        bool isthere = false;
+                        string s = "";
 
                         foreach (string word in words)
                         {
@@ -108,19 +110,23 @@ namespace WebApplication1
                             {
 
                                 Keywords.Add(word);
+                                isthere = false;
+                                break;
                             }
                         }
                         else
                         {
                             if (word.ToLower() == uWord.ToLower())
                             {
-
-                                Keywords.Add(word);
+                                s = word;
+                                isthere = true;
                             }
 
                         }
-
+                        
                         }
+                        if (isthere)
+                            Keywords.Add(s);
 
                         i++;
                     }
@@ -257,7 +263,7 @@ namespace WebApplication1
                             {
 
                                 count++;
-
+                                break;
                             }
                         }
 
@@ -269,7 +275,7 @@ namespace WebApplication1
                 }
                 catch(Exception ex)
                 { }
-                percentageOfMatchedKeywWords = (float)count;
+                percentageOfMatchedKeywWords = ((float)count/totalNumber)*100.0f;
                 
 
 
@@ -306,6 +312,7 @@ namespace WebApplication1
                             {
 
                                 count++;
+                                break;
 
                             }
                         }
@@ -318,7 +325,7 @@ namespace WebApplication1
                 }
                 catch (Exception ex)
                 { }
-                percentageOfMatchedKeywWords = (float)count;
+                percentageOfMatchedKeywWords = ((float)count / totalNumber) * 100.0f;
 
 
 
@@ -354,6 +361,7 @@ namespace WebApplication1
                             {
 
                                 count++;
+                                break;
 
                             }
                         }
@@ -366,7 +374,7 @@ namespace WebApplication1
                 }
                 catch (Exception ex)
                 { }
-                percentageOfMatchedKeywWords = (float)count;
+                percentageOfMatchedKeywWords = ((float)count / totalNumber) * 100.0f;
 
 
 

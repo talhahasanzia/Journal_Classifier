@@ -41,25 +41,39 @@ namespace WebApplication1
             string[] splitter = { ".", " ", ":", ",", ";", "'", "\"", "(", ")" };
             Journal[] journals = DataManager.GetSpringerData();
             float mostmatch = 0;
+            string names = "";
             foreach (Journal j in journals)
             { 
             
             float match=Comparator.GetStatsSpringer(j.Keywords.Split(splitter,StringSplitOptions.RemoveEmptyEntries),userKeywords);
 
-                if (match > mostmatch)
+                if (match >= 50)
                 {
 
-                    mostmatch = match;
+                   
                     Springer = j;
-
+                    names += j.Name + "<br>";  // remove this line
+                    // add journal name as text here (html plain text or asp label)
+                    // add new button here
+                    // add button in div (see html for journal SPRINGER names div)
+                    // add onClick event by button.onClick+=newOnclickhandler;
+                    // add response.redirect(j.link); code to that event , it will redirect to that link
+                    // SEE EXISTING onClick EVENTS FOR LINKS CORRECTION
                  }
             
             }
 
-
-            Journal1Link = Springer.Link;
-            Journal1SubLink = Springer.Submit;
-            Journal1Name.Text = "Springer:<br>"+Springer.Name;
+            // REMOVE THIS CODE WHEN YOU IMPLEMENT ADDING JOURNAL NAMES AND BUTTONS
+            if (String.IsNullOrEmpty(names))
+            {
+                Journal3Name.Text = "Springer:<br>" + "No match found";
+            }
+            else
+            {
+                Journal1Link = Springer.Link;
+                Journal1SubLink = Springer.Submit;
+                Journal1Name.Text = "Springer:<br>" + names;
+            }
         
         }
 
@@ -70,25 +84,40 @@ namespace WebApplication1
             string[] splitter = { ".", " ", ":", ",", ";", "'", "\"", "(", ")" };
             Journal[] journals = DataManager.GetEmeraldData();
             float mostmatch = 0;
+            string names = "";
             foreach (Journal j in journals)
             {
 
-                float match = Comparator.GetStatsSpringer(j.Keywords.Split(splitter, StringSplitOptions.RemoveEmptyEntries), userKeywords);
+                float match = Comparator.GetStatsEmerald(j.Keywords.Split(splitter, StringSplitOptions.RemoveEmptyEntries), userKeywords);
 
-                if (match > mostmatch)
+                if (match >= 50)
                 {
 
-                    mostmatch = match;
+                    
                     Emerald = j;
+                    names += j.Name + "<br>"; // remove this line
+                    // add journal name as text here (html plain text or asp label)
+                    // add new button here
+                    // add button in div (see html for journal EMERALD names div)
+                    // add onClick event by button.onClick+=newOnclickhandler;
+                    // add response.redirect(j.link); code to that event , it will redirect to that link
+                    // SEE EXISTING onClick EVENTS FOR LINKS CORRECTION
 
                 }
 
             }
 
-
-            Journal2Link = Emerald.Link;
-            Journal2SubLink =Emerald.Submit;
-            Journal2Name.Text = "Emerald:<br>" + Emerald.Name;
+            // REMOVE THIS CODE WHEN YOU IMPLEMENT ADDING JOURNAL NAMES AND BUTTONS
+            if (String.IsNullOrEmpty(names))
+            {
+                Journal2Name.Text = "Emerald:<br>" + "No match found";
+            }
+            else
+            {
+                Journal2Link = Emerald.Link;
+                Journal2SubLink = Emerald.Submit;
+                Journal2Name.Text = "Emerald:<br>" + names;
+            }
 
         }
 
@@ -96,7 +125,7 @@ namespace WebApplication1
         {
 
 
-
+            string names = "";
             Journal ACM = new Journal();
             string[] splitter = { ".", " ", ":", ",", ";", "'", "\"", "(", ")" };
             Journal[] journals = DataManager.GetACMData();
@@ -104,22 +133,34 @@ namespace WebApplication1
             foreach (Journal j in journals)
             {
 
-                float match = Comparator.GetStatsSpringer(j.Keywords.Split(splitter, StringSplitOptions.RemoveEmptyEntries), userKeywords);
+                float match = Comparator.GetStatsACM(j.Keywords.Split(splitter, StringSplitOptions.RemoveEmptyEntries), userKeywords);
 
-                if (match > mostmatch)
+                if (match >= 50)
                 {
-
-                    mostmatch = match;
+                   
                     ACM = j;
-
+                    names += j.Name + "<br>";  // remove this line
+                    // add journal name as text here (html plain text or asp label)
+                    // add new button here
+                    // add button in div (see html for journal ACM names div)
+                    // add onClick event by button.onClick+=newOnclickhandler;
+                    // add response.redirect(j.link); code to that event , it will redirect to that link
+                    // SEE EXISTING onClick EVENTS FOR LINKS CORRECTION
                 }
 
             }
 
-
-            Journal3Link = ACM.Link;
-            Journal3SubLink = ACM.Submit;
-            Journal3Name.Text = ACM.Website+":<br>" + ACM.Name;
+            // REMOVE THIS CODE WHEN YOU IMPLEMENT ADDING JOURNAL NAMES AND BUTTONS
+            if (String.IsNullOrEmpty(names))
+            {
+                Journal3Name.Text = "ACM:<br>" + "No match found";
+            }
+            else
+            {
+                Journal3Link = ACM.Link;
+                Journal3SubLink = ACM.Submit;
+                Journal3Name.Text = "ACM:<br>" + names;
+            }
 
         }
         void RunAnalysis()
