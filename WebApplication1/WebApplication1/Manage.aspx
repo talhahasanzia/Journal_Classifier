@@ -31,7 +31,7 @@
         </asp:DropDownList>
             <asp:Label  ID="Label1" CssClass="label" Font-Names="Consolas" runat="server" Text="Link: "></asp:Label>
                <asp:TextBox ID="UrlText" runat="server" TextMode="Url"></asp:TextBox>
-               <asp:DropDownList  CssClass="with-dropdown" ID="JournalLinksBy" runat="server" AutoPostBack="True">
+               <asp:DropDownList  CssClass="with-dropdown" ID="JournalLinksBy" runat="server" >
 
              <asp:ListItem Selected="True" Value="abc">Search Journal Links by:</asp:ListItem>
              <asp:ListItem  Value="Tag">Tag </asp:ListItem>
@@ -41,7 +41,7 @@
         </asp:DropDownList>
                <asp:Label  ID="JournalValue" CssClass="label" Font-Names="Consolas" runat="server" Text="Value:"></asp:Label>
                 <asp:TextBox ID="JournalTextbox" runat="server" ></asp:TextBox>
-               <asp:DropDownList  CssClass="with-dropdown" ID="KeywordDropdown" runat="server"  AutoPostBack="True">
+               <asp:DropDownList  CssClass="with-dropdown" ID="KeywordDropdown" runat="server"  >
 
              <asp:ListItem Selected="True" Value="abc">Search Keyword by:</asp:ListItem>
              <asp:ListItem  Value="Tag">Tag </asp:ListItem>
@@ -57,7 +57,7 @@
 
 
 
-             <asp:DropDownList  CssClass="with-dropdown" ID="HeadingValue" runat="server"  AutoPostBack="True">
+             <asp:DropDownList  CssClass="with-dropdown" ID="HeadingValue" runat="server"  >
 
              <asp:ListItem Selected="True" Value="abc">Search Name by:</asp:ListItem>
              <asp:ListItem  Value="Tag">Tag </asp:ListItem>
@@ -71,7 +71,7 @@
            
 
         
-            <asp:DropDownList  CssClass="with-dropdown" ID="SubmitValue" runat="server"  AutoPostBack="True">
+            <asp:DropDownList  CssClass="with-dropdown" ID="SubmitValue" runat="server"  >
 
              <asp:ListItem Selected="True" Value="abc">Search SubmitLink by:</asp:ListItem>
              <asp:ListItem  Value="Tag">Tag </asp:ListItem>

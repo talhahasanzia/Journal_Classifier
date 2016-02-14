@@ -49,7 +49,7 @@ namespace WebApplication1
 
                     SQLCon.Open();
 
-                    string Comm = "SELECT DISTINCT JournalName FROM Journal_Data WHERE JournalName='Springer'";
+                    string Comm = "SELECT DISTINCT JournalName FROM Journal_Data WHERE Website='Springer'";
 
                     SqlCeCommand command = new SqlCeCommand(Comm);
                     command.Connection = SQLCon;
@@ -127,7 +127,7 @@ namespace WebApplication1
 
                     SQLCon.Open();
 
-                    string Comm = "SELECT DISTINCT JournalName FROM Journal_Data WHERE JournalName='Emerald'";
+                    string Comm = "SELECT DISTINCT JournalName FROM Journal_Data WHERE Website='Emerald'";
 
                     SqlCeCommand command = new SqlCeCommand(Comm);
                     command.Connection = SQLCon;
@@ -205,7 +205,7 @@ namespace WebApplication1
 
                     SQLCon.Open();
 
-                    string Comm = "SELECT DISTINCT JournalName FROM Journal_Data WHERE JournalName='ACM' OR 'Other'";
+                    string Comm = "SELECT DISTINCT JournalName FROM Journal_Data WHERE Website='ACM'";
 
                     SqlCeCommand command = new SqlCeCommand(Comm);
                     command.Connection = SQLCon;

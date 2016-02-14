@@ -19,18 +19,18 @@ namespace WebApplication1
             LogLabel.Text = "Links";
 
             
-            JournalLinksBy.Visible = false;
-            JournalTextbox.Visible = false;
-            JournalValue.Visible = false;
-            KeywordDropdown.Visible = false;
-            KeywordTextbox.Visible = false;
-            KeywordValue.Visible = false;
-            HeadingText.Enabled = false;
-            HeadingValue.Enabled = false;
-            SubmitText.Enabled = false;
-            SubmitValue.Enabled = false;
-            Label3.Enabled = false;
-            Label4.Enabled = false;
+            //JournalLinksBy.Visible = false;
+            //JournalTextbox.Visible = false;
+            //JournalValue.Visible = false;
+            //KeywordDropdown.Visible = false;
+            //KeywordTextbox.Visible = false;
+            //KeywordValue.Visible = false;
+            //HeadingText.Enabled = false;
+            //HeadingValue.Enabled = false;
+            //SubmitText.Enabled = false;
+            //SubmitValue.Enabled = false;
+            //Label3.Enabled = false;
+            //Label4.Enabled = false;
         }
 
         protected void JournalDrop_SelectedIndexChanged(object sender, EventArgs e)

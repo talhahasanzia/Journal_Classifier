@@ -68,7 +68,7 @@ namespace WebApplication1
 
             Journal Emerald= new Journal();
             string[] splitter = { ".", " ", ":", ",", ";", "'", "\"", "(", ")" };
-            Journal[] journals = DataManager.GetSpringerData();
+            Journal[] journals = DataManager.GetEmeraldData();
             float mostmatch = 0;
             foreach (Journal j in journals)
             {
@@ -86,9 +86,9 @@ namespace WebApplication1
             }
 
 
-            Journal1Link = Emerald.Link;
-            Journal1SubLink =Emerald.Submit;
-            Journal1Name.Text = "Emerald:<br>" + Emerald.Name;
+            Journal2Link = Emerald.Link;
+            Journal2SubLink =Emerald.Submit;
+            Journal2Name.Text = "Emerald:<br>" + Emerald.Name;
 
         }
 
@@ -99,7 +99,7 @@ namespace WebApplication1
 
             Journal ACM = new Journal();
             string[] splitter = { ".", " ", ":", ",", ";", "'", "\"", "(", ")" };
-            Journal[] journals = DataManager.GetSpringerData();
+            Journal[] journals = DataManager.GetACMData();
             float mostmatch = 0;
             foreach (Journal j in journals)
             {
@@ -117,9 +117,9 @@ namespace WebApplication1
             }
 
 
-            Journal1Link = ACM.Link;
-            Journal1SubLink = ACM.Submit;
-            Journal1Name.Text = ACM.Website+":<br>" + ACM.Name;
+            Journal3Link = ACM.Link;
+            Journal3SubLink = ACM.Submit;
+            Journal3Name.Text = ACM.Website+":<br>" + ACM.Name;
 
         }
         void RunAnalysis()
@@ -156,6 +156,7 @@ namespace WebApplication1
         {
 
             string suggestedWords = String.Join(",",Comparator.PrepareUserKeywords(TextBox1.Text));
+            //suggestedWords = Comparator.ProcessWords(suggestedWords);
             TextBox2.Text =  suggestedWords;
 
 

@@ -128,11 +128,106 @@ namespace WebApplication1
                 catch (Exception es)
                 { }
 
-                return Keywords.ToArray();
+                List<string> newWords = new List<string>();
+
+
+                foreach (string temp in Keywords)
+                {
+
+                    if (newWords.Contains(temp))
+                    {
+
+                    }
+                    else
+                    {
+
+                        newWords.Add(temp);
+                    
+                    }
+                
+                }
+
+               
+                return newWords.ToArray();
             }
 
 
-           
+
+            public static string ProcessWords(string text)
+            {
+                ///////////////////////// Get words list ////////////////////////////////
+                StreamReader read = new StreamReader(HttpContext.Current.Server.MapPath("~/App_Data/Words.txt"));
+
+                string lineRead = read.ReadLine();
+
+                while (lineRead != null)
+                {
+
+                    words.Add(lineRead);
+                    try
+                    {
+                        lineRead = read.ReadLine();
+                    }
+                    catch (NullReferenceException ec)
+                    {
+                        break;
+                    }
+                }
+                read.Close();
+                read.Dispose();
+                /////////////////////////////////////////////////////////////////////////
+                string[] splitter = { "," };
+                string[] wordsArray = text.Split(splitter, StringSplitOptions.RemoveEmptyEntries);
+
+
+                //////////////////// Check if words is /////////////////////////////////
+                foreach (string word in words)
+                {
+                    for (int count = 0; count < wordsArray.Length; count++)
+                    {
+                        if (wordsArray[count].ToLower() == word.ToLower())
+                            wordsArray[count] = "";
+
+
+
+
+                    }
+
+
+                }
+                ///////////////////////////////////////////////////////////////////////
+
+
+
+                List<string> listString = wordsArray.ToList();
+
+
+
+                listString.RemoveAll(item => item == "");
+
+
+                List<string> newWords = new List<string>();
+
+
+                foreach (string word in listString)
+                {
+
+
+                    if (newWords.Contains(word))
+                    {
+
+                    }
+                    else
+                    {
+                        newWords.Add(word);
+
+                    }
+
+                }
+
+                text = String.Join(",", newWords.ToArray());
+                return text;
+            }
 
 
           
