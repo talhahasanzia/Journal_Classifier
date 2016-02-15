@@ -153,7 +153,66 @@ namespace WebApplication1
                 
                 }
 
-               
+                words = new List<string>();
+
+                StreamReader read = new StreamReader(HttpContext.Current.Server.MapPath("~/App_Data/Words.txt"));
+
+                string lineRead = read.ReadLine();
+
+                while (lineRead != null)
+                {
+
+                    words.Add(lineRead);
+                    try
+                    {
+                        lineRead = read.ReadLine();
+                    }
+                    catch (NullReferenceException ec)
+                    {
+                        break;
+                    }
+                }
+                read.Close();
+                read.Dispose();
+
+                foreach (string word in words)
+                { 
+                    if(newWords.Contains(word))
+                    {
+
+                        newWords.Remove(word);
+
+                    }
+                
+                }
+
+                string[] splitter2={"-"};
+                List<string> filterKeywords = newWords;
+                try
+                {
+                    foreach (string sample in newWords)
+                    {
+
+                        if (sample.Contains("-"))
+                        {
+                            string[] temps = sample.Split(splitter2, StringSplitOptions.RemoveEmptyEntries);
+
+                            if (filterKeywords.Contains(temps[0]))
+                                filterKeywords.Remove(temps[0]);
+                            if (filterKeywords.Contains(temps[1]))
+                                filterKeywords.Remove(temps[1]);
+
+                        }
+
+                    }
+                }
+                catch (Exception ed)
+                { 
+                
+                
+                
+                }
+
                 return newWords.ToArray();
             }
 
