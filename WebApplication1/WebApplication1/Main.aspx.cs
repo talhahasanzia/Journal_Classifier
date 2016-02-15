@@ -11,13 +11,16 @@ namespace WebApplication1
     public partial class Main : System.Web.UI.Page
     {
 
+        float Strictness = 20;
+
+
         static string Journal1Link = null;
         static string Journal1SubLink = null;
         static string Journal2Link = null;
         static string Journal2SubLink = null;
         static string Journal3Link = null;
         static string Journal3SubLink = null;
-        
+       
        
         string[] userKeywords;
         protected void Page_Load(object sender, EventArgs e)
@@ -47,9 +50,11 @@ namespace WebApplication1
             
             float match=Comparator.GetStatsSpringer(j.Keywords.Split(splitter,StringSplitOptions.RemoveEmptyEntries),userKeywords);
 
-                if (match >= 50)
+                if (match >= Strictness)
                 {
-
+                    DropDownList1.Items.Add(new ListItem(j.Name, j.Link + "^" + j.Submit));
+                    DropDownList1.SelectedIndex = DropDownList1.Items.Count - 1;
+                   
                    
                     Springer = j;
                     names += j.Name + "<br>";  // remove this line
@@ -63,17 +68,9 @@ namespace WebApplication1
             
             }
 
-            // REMOVE THIS CODE WHEN YOU IMPLEMENT ADDING JOURNAL NAMES AND BUTTONS
             if (String.IsNullOrEmpty(names))
-            {
-                Journal3Name.Text = "Springer:<br>" + "No match found";
-            }
-            else
-            {
-                Journal1Link = Springer.Link;
-                Journal1SubLink = Springer.Submit;
-                Journal1Name.Text = "Springer:<br>" + names;
-            }
+                Journal1Details.Text = "No match found";
+
         
         }
 
@@ -90,11 +87,14 @@ namespace WebApplication1
 
                 float match = Comparator.GetStatsEmerald(j.Keywords.Split(splitter, StringSplitOptions.RemoveEmptyEntries), userKeywords);
 
-                if (match >= 50)
+                if (match >= Strictness)
                 {
 
-                    
-                    Emerald = j;
+                    DropDownList2.Items.Add(new ListItem(j.Name, j.Link + "^" + j.Submit));
+                    DropDownList2.SelectedIndex = DropDownList2.Items.Count - 1;
+                   
+                   
+                     Emerald = j;
                     names += j.Name + "<br>"; // remove this line
                     // add journal name as text here (html plain text or asp label)
                     // add new button here
@@ -107,23 +107,15 @@ namespace WebApplication1
 
             }
 
-            // REMOVE THIS CODE WHEN YOU IMPLEMENT ADDING JOURNAL NAMES AND BUTTONS
             if (String.IsNullOrEmpty(names))
-            {
-                Journal2Name.Text = "Emerald:<br>" + "No match found";
-            }
-            else
-            {
-                Journal2Link = Emerald.Link;
-                Journal2SubLink = Emerald.Submit;
-                Journal2Name.Text = "Emerald:<br>" + names;
-            }
+                Journal2Details.Text = "No match found";
+
 
         }
 
         void MatchACMandOther(string[] userKeywords)
         {
-
+            
 
             string names = "";
             Journal ACM = new Journal();
@@ -135,9 +127,12 @@ namespace WebApplication1
 
                 float match = Comparator.GetStatsACM(j.Keywords.Split(splitter, StringSplitOptions.RemoveEmptyEntries), userKeywords);
 
-                if (match >= 50)
-                {
-                   
+                if (match >= Strictness)
+
+                  
+                    
+                    DropDownList3.Items.Add(new ListItem(j.Name, j.Link+"^"+j.Submit));
+                    DropDownList3.SelectedIndex = DropDownList3.Items.Count - 1;
                     ACM = j;
                     names += j.Name + "<br>";  // remove this line
                     // add journal name as text here (html plain text or asp label)
@@ -148,21 +143,21 @@ namespace WebApplication1
                     // SEE EXISTING onClick EVENTS FOR LINKS CORRECTION
                 }
 
-            }
-
-            // REMOVE THIS CODE WHEN YOU IMPLEMENT ADDING JOURNAL NAMES AND BUTTONS
             if (String.IsNullOrEmpty(names))
-            {
-                Journal3Name.Text = "ACM:<br>" + "No match found";
-            }
-            else
-            {
-                Journal3Link = ACM.Link;
-                Journal3SubLink = ACM.Submit;
-                Journal3Name.Text = "ACM:<br>" + names;
-            }
+                Journal3Details.Text = "No match found";
 
-        }
+
+
+
+
+            }
+            
+       
+           
+
+        
+
+
         void RunAnalysis()
         {
 
@@ -312,5 +307,61 @@ namespace WebApplication1
                 Response.Redirect(Journal1SubLink);
             }
         }
+
+        protected void DropDownList3_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            try
+            {
+                string[] splitter = { "^" };
+
+                string[] links = DropDownList3.SelectedValue.Split(splitter, StringSplitOptions.RemoveEmptyEntries);
+
+                Journal3SubLink = links[1];
+                Journal3Link = links[0];
+            }
+            catch (Exception ed)
+            { 
+            
+            
+            }
+        }
+
+        protected void DropDownList2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                string[] splitter = { "^" };
+
+                string[] links = DropDownList2.SelectedValue.Split(splitter, StringSplitOptions.RemoveEmptyEntries);
+
+                Journal2SubLink = links[1];
+                Journal2Link = links[0];
+            }
+            catch (Exception ed)
+            {
+
+
+            }
+        }
+
+        protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                string[] splitter = { "^" };
+
+                string[] links = DropDownList1.SelectedValue.Split(splitter, StringSplitOptions.RemoveEmptyEntries);
+
+                Journal1SubLink = links[1];
+                Journal1Link = links[0];
+            }
+            catch (Exception ed)
+            {
+
+
+            }
+        }
     }
 }
+

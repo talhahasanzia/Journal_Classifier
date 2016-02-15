@@ -57,4 +57,3 @@ C:\Users\Me\Desktop\WebApplication1aaqib\WebApplication1\WebApplication1\bin\Htm
 C:\Users\Me\Desktop\WebApplication1aaqib\WebApplication1\WebApplication1\obj\Debug\WebApplication1.csprojResolveAssemblyReference.cache
 C:\Users\Me\Desktop\WebApplication1aaqib\WebApplication1\WebApplication1\obj\Debug\WebApplication1.dll
 C:\Users\Me\Desktop\WebApplication1aaqib\WebApplication1\WebApplication1\obj\Debug\WebApplication1.pdb
-E:\Github\Journal_Classifier\WebApplication1\WebApplication1\obj\Debug\WebApplication1.csprojResolveAssemblyReference.cache

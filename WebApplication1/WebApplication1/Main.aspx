@@ -128,8 +128,8 @@
                 <div class="col-sm-4 portfolio-item"   style="height:200px; border-style:double; border-color:#808080;  border-width:thick;  border-radius:25px; text-align:center; font-family:Verdana; margin:10px,10px,10px,10px; padding:5px,5px,5px,5px;" >
                    <asp:Label ID="Label1" runat="server"  Text="Springer" Font-Size="Large" ForeColor="White"></asp:Label><br>
                     <br/>
-                                       <span  ><asp:Label ID="Journal1Name" runat="server" Text="Journal1"></asp:Label></span>
-                     <br/>
+                                       <span  ><asp:Label ID="Journal1Name" runat="server" Text="Springer"></asp:Label><br/><asp:DropDownList ID="DropDownList1" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged"  runat="server" AutoPostBack="True" Width="200px"></asp:DropDownList></span>
+                     <br/> <br/>
                        <asp:Button ID="Journal1Details"  CssClass="corner-radius-button" runat="server"  Text="More Details" BackColor="#18BC9C" BorderColor="#18BC9C" ForeColor="White" Height="30px"  Width="130px" Font-Bold="False" Font-Names="Verdana" Font-Size="Small" OnClick="Journal1Details_Click" /> 
                                 <asp:Button ID="Journal1Submit" CssClass="corner-radius-button" runat="server" Text="Submit Now" BackColor="#18BC9C" BorderColor="#18BC9C" ForeColor="White" Height="30px"  Width="130px" Font-Bold="False" Font-Names="Verdana" Font-Size="Small" OnClick="Journal1Submit_Click" />
                             
@@ -139,8 +139,9 @@
                 <div class="col-sm-4 portfolio-item" style="height:200px; border-style:double; border-color:#808080;  border-width:thick;  border-radius:25px; text-align:center; font-family:Verdana;  margin:10px,10px,10px,10px; padding:5px,5px,5px,5px;">
                    <asp:Label ID="Label2" runat="server"  Text="ACM" Font-Size="Large" ForeColor="White"></asp:Label><br>
                    <br/>
-                                        <span  ><asp:Label ID="Journal2Name" runat="server" Text="Journal2"></asp:Label></span>
-                     <br/>
+                                        <span  ><asp:Label ID="Journal2Name" runat="server" Text="Emerald"></asp:Label><br/>
+                                            <asp:DropDownList ID="DropDownList2" runat="server" OnSelectedIndexChanged="DropDownList2_SelectedIndexChanged" AutoPostBack="True" Width="200px"></asp:DropDownList></span>
+                     <br/> <br/>
                        <asp:Button ID="Journal2Details" CssClass="corner-radius-button"  runat="server"  Text="More Details" BackColor="#18BC9C" BorderColor="#18BC9C" ForeColor="White" Height="30px"  Width="130px" Font-Bold="False" Font-Names="Verdana" Font-Size="Small" OnClick="Journal2Details_Click" /> 
                                 <asp:Button ID="Journal2Submit" CssClass="corner-radius-button" runat="server" Text="Submit Now" BackColor="#18BC9C" BorderColor="#18BC9C" ForeColor="White" Height="30px"  Width="130px" Font-Bold="False" Font-Names="Verdana" Font-Size="Small" OnClick="Journal2Submit_Click" />
                             
@@ -151,13 +152,11 @@
                 <div class="col-sm-4 portfolio-item" style="height:200px; border-style:double;  border-color:#808080; border-width:thick;  border-radius:25px; text-align:center; font-family:Verdana;  margin:10px,10px,10px,10px; padding:5px,5px,5px,5px;">
                    <asp:Label ID="Label6" runat="server"  Text="ACM" Font-Size="Large" ForeColor="White"></asp:Label><br>
                    <br/>
-                                        <span  > <asp:Label ID="Journal3Name" runat="server" Text="Journal3"></asp:Label></span>
-                     <br/>
+                                        <span  >     <asp:Label ID="Journal3Name" runat="server" Text="ACM"></asp:Label><br/><asp:DropDownList ID="DropDownList3" runat="server" AutoPostBack="True" OnSelectedIndexChanged="DropDownList3_SelectedIndexChanged" Width="200px"></asp:DropDownList></span>
+                     <br/><br/>
                                 <asp:Button ID="Journal3Details" CssClass="corner-radius-button" runat="server"  Text="More Details" BackColor="#18BC9C" BorderColor="#18BC9C" ForeColor="White" Height="30px"  Width="130px" Font-Bold="False" Font-Names="Verdana" Font-Size="Small" OnClick="Journal3Details_Click" /> 
                                 <asp:Button ID="Journal3Submit" CssClass="corner-radius-button" runat="server" Text="Submit Now" BackColor="#18BC9C" BorderColor="#18BC9C" ForeColor="White" Height="30px"  Width="130px" Font-Bold="False" Font-Names="Verdana" Font-Size="Small" OnClick="Journal3Submit_Click" />
-                            
-                     <br/>
-                                        <br/>
+                   <br/> 
                 </div>
                
                
